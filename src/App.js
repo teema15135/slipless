@@ -1,49 +1,67 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import React from "react";
+import { DrawerItems, createAppContainer, createDrawerNavigator } from 'react-navigation';
+import { Text, StyleSheet, TouchableHighlight, Image, SafeAreaView, ScrollView, View, Dimensions } from 'react-native';
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import HomeScreen from './HomeBarcode';
+import PointScreen from './PointPage';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+const profileURI = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKumwtyvNNvq7clbwOA2XKKPAi4nIwZK_ViJCHGoy-gCx8mfvs';
+var displayName = 'ถั่วงอก';
 
-type Props = {};
-export default class App extends Component<Props> {
+const { height, width } = Dimensions.get('window');
+const drawerWidth = width * 0.45;
+
+const ProfileComponent = (props) => (
+  <SafeAreaView style={{ flex: 1, backgroundColor: 'rgba(15, 42, 21, 0.93)' }}>
+    <View style={{ height: 80, flexDirection: 'row', justifyContent: 'flex-start', }}>
+      <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', }}>
+        <Image source={{ uri: profileURI }} style={style.profileImg} />
+      </View>
+      <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>
+        <Text style={style.displayName}>{displayName}</Text>
+      </View>
+    </View>
+    <ScrollView>
+      <DrawerItems {...props} />
+    </ScrollView>
+  </SafeAreaView>
+)
+
+const Drawer = createDrawerNavigator(
+  {
+    Home: HomeScreen,
+    Point: PointScreen,
+  },
+  {
+    drawerWidth: drawerWidth,
+    drawerBackgroundColor: 'transparent',
+    contentComponent: ProfileComponent,
+  }
+);
+
+
+const ContainerDrawer = createAppContainer(Drawer);
+
+export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcoooooooomeeeeee to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
+      <ContainerDrawer />
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+const style = StyleSheet.create({
+  profileImg: {
+    height: 45,
+    width: 45,
+    borderRadius: 40,
+    margin: 20,
   },
-  welcome: {
+  displayName: {
+    color: 'white',
     fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+    paddingLeft: 20,
+    alignSelf: 'baseline',
+    fontFamily: 'Prompt-Light',
   },
 });

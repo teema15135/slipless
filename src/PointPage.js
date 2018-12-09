@@ -29,6 +29,14 @@ const list = [
 ];
 
 export default class PointPage extends Component {
+
+    static navigationOptions = {
+        tabBarLabel: 'PointScreen',
+        drawText: () => {
+            return(<Text>Your Point</Text>);
+        }
+    }
+
     space() {
         return (<View style={{ height: 1, width: '100%', backgroundColor: '#ececec' }} />)
     }
@@ -52,7 +60,7 @@ export default class PointPage extends Component {
                                 <Text style={style.listText}>{item.title}</Text>
                                 <View style={{ width: 30, flexDirection: 'row', justifyContent: 'center'}}>
                                     <Image style={{width: 17, height: 17, alignSelf: 'center', marginRight: 5}} source={require('../img/coin.png')} />
-                                    <Text style={}>{item.point}</Text>
+                                    <Text style={style.pointText}>{item.point}</Text>
                                 </View>
                             </View>
                         }

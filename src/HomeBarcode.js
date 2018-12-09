@@ -7,7 +7,8 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, ImageBackground } from 'react-native';
+import { Platform, Button, StyleSheet, Text, View, ImageBackground, Image } from 'react-native';
+import { Header, Left, Right, Icon } from 'native-base';
 import Barcode from 'react-native-barcode-builder';
 
 // const instructions = Platform.select({
@@ -19,7 +20,11 @@ import Barcode from 'react-native-barcode-builder';
 
 const valueOfBarcode = "593040659-4";
 
-export default class App extends Component {
+export default class HomeBarcode extends React.Component {
+    static navigationOptions = {
+        drawerLabel: 'Barcode',
+    };
+
     render() {
         return (
             <View style={styles.container}>
@@ -31,8 +36,12 @@ export default class App extends Component {
                     </ImageBackground>
                 </View>
                 <View style={styles.containerBottom}>
-                    <Barcode value="593040659-4" format="CODE128" />
+                    <Barcode value={valueOfBarcode} format="CODE128" />
                     <Text style={styles.valueBarcode}>{valueOfBarcode}</Text>
+                    <Button
+                        onPress={() => this.props.navigation.openDrawer()}
+                        title="Open"
+                    />
                 </View>
             </View>
         );
