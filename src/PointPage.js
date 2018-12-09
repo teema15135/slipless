@@ -30,13 +30,6 @@ const list = [
 
 export default class PointPage extends Component {
 
-    static navigationOptions = {
-        tabBarLabel: 'PointScreen',
-        drawText: () => {
-            return(<Text>Your Point</Text>);
-        }
-    }
-
     space() {
         return (<View style={{ height: 1, width: '100%', backgroundColor: '#ececec' }} />)
     }

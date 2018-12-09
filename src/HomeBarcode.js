@@ -7,8 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, Button, StyleSheet, Text, View, ImageBackground, Image } from 'react-native';
-import { Header, Left, Right, Icon } from 'native-base';
+import { TouchableHighlight, StyleSheet, Text, View, ImageBackground, Image } from 'react-native';
 import Barcode from 'react-native-barcode-builder';
 
 // const instructions = Platform.select({
@@ -22,7 +21,7 @@ const valueOfBarcode = "593040659-4";
 
 export default class HomeBarcode extends React.Component {
     static navigationOptions = {
-        drawerLabel: 'Barcode',
+        drawerLabel: 'บาร์โค้ด',
     };
 
     render() {
@@ -30,6 +29,9 @@ export default class HomeBarcode extends React.Component {
             <View style={styles.container}>
                 <View style={styles.containerTop}>
                     <ImageBackground source={require('../img/darkforest.png')} style={styles.imageBG}>
+                        <TouchableHighlight style={styles.menuButtonContainer} onPress={() => this.props.navigation.openDrawer()}>
+                            <Image source={require('../img/menu.png')} style={styles.menuButton} />
+                        </TouchableHighlight>
                         <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center' }}>
                             <Text style={styles.slipless}>Slipless</Text>
                         </View>
@@ -38,10 +40,6 @@ export default class HomeBarcode extends React.Component {
                 <View style={styles.containerBottom}>
                     <Barcode value={valueOfBarcode} format="CODE128" />
                     <Text style={styles.valueBarcode}>{valueOfBarcode}</Text>
-                    <Button
-                        onPress={() => this.props.navigation.openDrawer()}
-                        title="Open"
-                    />
                 </View>
             </View>
         );
@@ -78,5 +76,16 @@ const styles = StyleSheet.create({
     imageBG: {
         flex: 1,
         width: '100%',
-    }
+    },
+    menuButton: {
+        width: 25,
+        height: 25,
+    },
+    menuButtonContainer: {
+        width: 25,
+        height: 25,
+        position: 'absolute',
+        top: 20,
+        left: 20,
+    },
 });
