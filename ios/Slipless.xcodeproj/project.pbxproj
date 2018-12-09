@@ -56,6 +56,7 @@
 		2DDDB41BC1F14C5A8CDA4048 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5AD97738A1A14DDC8F7C1590 /* Poppins-Thin.ttf */; };
 		1E0A966AEB62488EA84494F8 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B965B6C1A08848A997478522 /* Poppins-ThinItalic.ttf */; };
 		F1F77D23EC6A457685A5A8DB /* Lobster-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00BC0F533341414D879ADE10 /* Lobster-Regular.ttf */; };
+		55322372120E460AA6D661C2 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B56E1DB0EA82484A9D54DEA4 /* libRCTFBSDK.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -380,6 +381,8 @@
 		5AD97738A1A14DDC8F7C1590 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; name = "Poppins-Thin.ttf"; path = "../assets/fonts/Poppins-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		B965B6C1A08848A997478522 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; name = "Poppins-ThinItalic.ttf"; path = "../assets/fonts/Poppins-ThinItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		00BC0F533341414D879ADE10 /* Lobster-Regular.ttf */ = {isa = PBXFileReference; name = "Lobster-Regular.ttf"; path = "../assets/fonts/Lobster-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E117FEA542574CF798DDA58B /* RCTFBSDK.xcodeproj */ = {isa = PBXFileReference; name = "RCTFBSDK.xcodeproj"; path = "../node_modules/react-native-fbsdk/ios/RCTFBSDK.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		B56E1DB0EA82484A9D54DEA4 /* libRCTFBSDK.a */ = {isa = PBXFileReference; name = "libRCTFBSDK.a"; path = "libRCTFBSDK.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -407,6 +410,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				55322372120E460AA6D661C2 /* libRCTFBSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -593,6 +597,7 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
+				E117FEA542574CF798DDA58B /* RCTFBSDK.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1265,6 +1270,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Slipless.app/Slipless";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-fbsdk\ios\RCTFBSDK/**",
+				);
 			};
 			name = Debug;
 		};
@@ -1283,6 +1296,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Slipless.app/Slipless";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-fbsdk\ios\RCTFBSDK/**",
+				);
 			};
 			name = Release;
 		};
@@ -1302,6 +1323,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Slipless;
 				VERSIONING_SYSTEM = "apple-generic";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-fbsdk\ios\RCTFBSDK/**",
+				);
 			};
 			name = Debug;
 		};
@@ -1320,6 +1345,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Slipless;
 				VERSIONING_SYSTEM = "apple-generic";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-fbsdk\ios\RCTFBSDK/**",
+				);
 			};
 			name = Release;
 		};
@@ -1346,6 +1375,14 @@
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-fbsdk\ios\RCTFBSDK/**",
+				);
 			};
 			name = Debug;
 		};
@@ -1372,6 +1409,14 @@
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-fbsdk\ios\RCTFBSDK/**",
+				);
 			};
 			name = Release;
 		};
@@ -1397,6 +1442,14 @@
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Slipless-tvOS.app/Slipless-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-fbsdk\ios\RCTFBSDK/**",
+				);
 			};
 			name = Debug;
 		};
@@ -1422,6 +1475,14 @@
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Slipless-tvOS.app/Slipless-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-fbsdk\ios\RCTFBSDK/**",
+				);
 			};
 			name = Release;
 		};
