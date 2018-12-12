@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import { TouchableHighlight, StyleSheet, Text, View, ImageBackground, Image } from 'react-native';
+import { Button, TouchableHighlight, StyleSheet, Text, View, ImageBackground, Image } from 'react-native';
 import Barcode from 'react-native-barcode-builder';
 
 // const instructions = Platform.select({
@@ -17,7 +17,65 @@ import Barcode from 'react-native-barcode-builder';
 //     'Shake or press menu button for dev menu',
 // });
 
-const valueOfBarcode = "593040659-4";
+// const valueOfBarcode = "593040659-4";
+
+class UserBarcode extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoading: true,
+            valueOfBarcode: '0',
+        };
+    }
+
+    componentDidMount() {
+        this.newBarcode;
+    }
+
+    newBarcode = () => {
+        var request = new XMLHttpRequest();
+        request.responseType = 'json';
+        var comp = this;
+        request.onload = function () {
+            console.log(request.response);
+            comp.setState({
+                isLoading: false,
+                valueOfBarcode: request.response.barcode_num,
+            });
+        };
+
+        request.open('GET', 'http://10.51.64.53:8065/getBarcode?email=chompu.luffy@gmail.com');
+        request.send();
+        
+    }
+
+    render() {
+        if (this.state.isLoading) {
+            return (
+                <View>
+                <Button
+                    onPress={this.newBarcode}
+                    title="Get New Barcode"
+                />
+                </View>
+            );
+        }
+        return (
+
+            <View>
+                <Barcode value={this.state.valueOfBarcode} format="CODE128" />
+                <Text style={styles.valueBarcode}>{this.state.valueOfBarcode}</Text>
+                <Button
+                    onPress={this.newBarcode}
+                    title="Get New Barcode"
+                />
+                
+            </View>
+        );
+    }
+}
+
 
 export default class HomeBarcode extends React.Component {
     static navigationOptions = {
@@ -38,8 +96,7 @@ export default class HomeBarcode extends React.Component {
                     </ImageBackground>
                 </View>
                 <View style={styles.containerBottom}>
-                    <Barcode value={valueOfBarcode} format="CODE128" />
-                    <Text style={styles.valueBarcode}>{valueOfBarcode}</Text>
+                    <UserBarcode></UserBarcode>
                 </View>
             </View>
         );
