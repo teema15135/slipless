@@ -1,11 +1,10 @@
 import React from "react";
 import { DrawerItems, createAppContainer, createDrawerNavigator } from 'react-navigation';
-import { Text, StyleSheet, TouchableHighlight, Image, SafeAreaView, ScrollView, View, Dimensions } from 'react-native';
-import { fromLeft } from 'react-navigation-transitions';
+import { Text, StyleSheet, Image, SafeAreaView, ScrollView, View, Dimensions } from 'react-native';
 
 import HomeScreen from './HomeBarcode';
 import PointScreen from './PointIndex';
-
+import LoginScreen from './LoginScreen';
 import TestScreen from './TestStackIndex';
 
 const profileURI = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKumwtyvNNvq7clbwOA2XKKPAi4nIwZK_ViJCHGoy-gCx8mfvs';
@@ -84,6 +83,7 @@ const Drawer = createDrawerNavigator(
     Home: HomeScreen,
     Point: PointScreen,
     Test: TestScreen,
+    Login: LoginScreen,
   },
   {
     initialRouteName: 'Home',
@@ -94,8 +94,8 @@ const Drawer = createDrawerNavigator(
     backBehavior: 'initialRoute',
     contentOptions: {
       labelStyle: styles.labelStyle,
-    }
-  }
+    },
+  },
 );
 
 

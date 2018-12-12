@@ -1,27 +1,36 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import FBSDK, { LoginManager } from 'react-native-fbsdk';
+import {
+    StyleSheet,
+    Text,
+    View,
+    Button
+} from 'react-native';
 
-export default class loginScreen extends Component {
+import { handleFbLogin } from './lib/auth';
 
-    _fbAuth() {
-        LoginManager.logInWithReadPermissions(['public_profile']).then(function (result) {
-            if (result.isCancelled) {
-                console.log('Login was cancelled ');
-            } else {
-                console.log('Login was a success' + result.grantedPermissions.toString());
-            }
-        }, function (error) {
-            console.log('An error occured: ' + error);
-        })
-    }
+export default class App extends Component {
+    // static navigationOptions = {
+    //     drawerLabel: 'login',
+    // };
 
     render() {
         return (
-            <View>
-                <TouchableOpacity onPress={this._fbAuth()}>
-                </TouchableOpacity>
+            <View style={styles.container}>
+                <Button
+                    onPress={handleFbLogin}
+                    title="Sign in with facebook"
+                    color="#3c50e8"
+                />
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    }
+});

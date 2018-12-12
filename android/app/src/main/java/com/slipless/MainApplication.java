@@ -43,8 +43,8 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new RNFirebasePackage(),
             new RNFirebaseAuthPackage(),
-            new FacebookLoginPackage()
-          new RNGestureHandlerPackage()
+            new FacebookLoginPackage(),
+            new RNGestureHandlerPackage()
       );
     }
 
