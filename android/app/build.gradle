@@ -139,9 +139,24 @@ android {
 dependencies {
     compile project(':react-native-gesture-handler')
     compile project(':react-native-fbsdk')
+    compile(project(':react-native-firebase')) {
+        transitive = false
+    }
+    compile project(':react-native-facebook-login')
+    compile 'com.google.android.gms:play-services-base:+'
+    compile 'com.google.android.gms:play-services-wallet:+'
+    compile 'com.google.android.gms:play-services-identity:+'
+    compile "com.google.android.gms:play-services-base:11.2.0"
+    
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    
+    compile 'com.google.firebase:firebase-core:16.0.4'
+    compile 'com.google.firebase:firebase-auth:16.0.5'
+    compile 'com.google.firebase:firebase-database:16.0.5'
+    //compile 'com.google.firebase:firebase-database'
+    
 }
 
 // Run this once to be able to run the application with BUCK
@@ -150,3 +165,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+
+apply plugin: 'com.google.gms.google-services'
