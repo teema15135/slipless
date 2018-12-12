@@ -1,7 +1,6 @@
 import React from "react";
 import { DrawerItems, createAppContainer, createDrawerNavigator } from 'react-navigation';
-import { Text, StyleSheet, TouchableHighlight, Image, SafeAreaView, ScrollView, View, Dimensions } from 'react-native';
-import { fromLeft } from 'react-navigation-transitions';
+import { Text, StyleSheet, Image, SafeAreaView, ScrollView, View, Dimensions } from 'react-native';
 
 import HomeScreen from './HomeBarcode';
 import PointScreen from './PointIndex';
@@ -94,8 +93,8 @@ const Drawer = createDrawerNavigator(
     backBehavior: 'initialRoute',
     contentOptions: {
       labelStyle: styles.labelStyle,
-    }
-  }
+    },
+  },
 );
 
 
