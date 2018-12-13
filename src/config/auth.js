@@ -1,4 +1,5 @@
 import { FBLoginManager } from 'react-native-facebook-login';
+//import { GoogleSignin } from 'react-native-google-signin';
 
 const Facebook = {
   login: (permissions) => {
@@ -28,3 +29,4 @@ const Facebook = {
 const Auth = { Facebook };
 
 export default Auth;
+
