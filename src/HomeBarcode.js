@@ -6,6 +6,8 @@
  * @flow
  */
 
+//API
+
 import React, { Component } from 'react';
 import { Button, TouchableHighlight, StyleSheet, Text, View, ImageBackground, Image } from 'react-native';
 import Barcode from 'react-native-barcode-builder';
