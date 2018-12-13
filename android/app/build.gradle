@@ -139,9 +139,7 @@ android {
 dependencies {
     compile project(':react-native-gesture-handler')
     compile project(':react-native-fbsdk')
-    compile(project(':react-native-firebase')) {
-        transitive = false
-    }
+    compile project(':react-native-firebase')
     compile project(':react-native-facebook-login')
     compile 'com.google.android.gms:play-services-base:+'
     compile 'com.google.android.gms:play-services-wallet:+'
@@ -151,10 +149,9 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
-    
-    compile 'com.google.firebase:firebase-core:16.0.4'
-    compile 'com.google.firebase:firebase-auth:16.0.5'
-    compile 'com.google.firebase:firebase-database:16.0.5'
+    implementation "com.google.firebase:firebase-core:16.0.4"
+    implementation "com.google.firebase:firebase-auth:16.1.0"
+    implementation "com.google.firebase:firebase-database:16.0.5"
     //compile 'com.google.firebase:firebase-database'
     
 }
