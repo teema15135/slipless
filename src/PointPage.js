@@ -37,10 +37,24 @@ export default class PointPage extends Component {
     render() {
         return (
             <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
-                <View style={{ flex: 2, }}>
+                <View style={{ flex: 2 }}>
                     <ImageBackground source={require('../img/darkforest.png')} style={mainStyle.imageBG}>
-                        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={{ fontFamily: 'Poppins-Light', fontSize: 100, color: 'white' }}>{point}</Text>
+                        <View style={{ flexDirection: 'column' }}>
+                            <View style={{ flex: 1, flexDirection: 'row', marginTop: 10 }}>
+                                <View style={{ flex: 1 }}>
+                                    <Image style={{ top: 5, left: 5, width: 20, height: 20, marginLeft: 15 }} source={require('../img/left_arrow.png')} />
+                                </View>
+                                <View style={{ flex: 3 }}>
+                                    <Text style={{ fontFamily: 'Poppins-Light', fontSize: 20, color: 'white', alignSelf: 'center' }}>Point</Text>
+                                </View>
+                                <View style={{ flex: 1 }}>
+
+                                </View>
+                            </View>
+                            <View style={{ marginTop: 30 }}>
+                                <Text style={{ fontFamily: 'Poppins-Light', fontSize: 100, color: 'white', alignSelf: 'center' }}>{point}</Text>
+                                <Text style={{ fontFamily: 'Poppins-Light', fontSize: 10, color: 'white', alignSelf: 'center' }}>total</Text>
+                            </View>
                         </View>
                     </ImageBackground>
                 </View>
@@ -49,10 +63,10 @@ export default class PointPage extends Component {
                         data={list}
                         ItemSeparatorComponent={this.space}
                         renderItem={({ item }) =>
-                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <Text style={style.listText}>{item.title}</Text>
-                                <View style={{ width: 30, flexDirection: 'row', justifyContent: 'center'}}>
-                                    <Image style={{width: 17, height: 17, alignSelf: 'center', marginRight: 5}} source={require('../img/coin.png')} />
+                                <View style={{ width: 30, flexDirection: 'row', justifyContent: 'center' }}>
+                                    <Image style={{ width: 17, height: 17, alignSelf: 'center', marginRight: 5 }} source={require('../img/coin.png')} />
                                     <Text style={style.pointText}>{item.point}</Text>
                                 </View>
                             </View>
@@ -67,7 +81,7 @@ export default class PointPage extends Component {
 const style = StyleSheet.create({
     listText: {
         margin: 10,
-        fontSize: 18,
+        fontSize: 15,
         color: '#202020',
     },
     separator: {
