@@ -47,7 +47,7 @@ class UserBarcode extends Component {
             });
         };
 
-        request.open('GET', 'http://10.51.64.53:8065/getBarcode?email=chompu.luffy@gmail.com');
+        request.open('GET', 'http://10.51.64.40:8065/getBarcode?email=chompu.luffy@gmail.com');
         request.send();
         
     }

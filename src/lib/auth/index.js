@@ -3,7 +3,10 @@ import { fbLoginPermissions } from '../../constants/index';
 
 import firebase from '../../config/firebase';
 import auth from '../../config/auth';
-import RNFirebase from 'react-native-firebase'
+import RNFirebase from 'react-native-firebase';
+
+import { createAppContainer, createStackNavigator } from 'react-navigation';
+
 
 export const handleFbLogin = () => (
   //firebase.auth().createUserWithEmailAndPassword("test@mail.com", "123456")
@@ -14,7 +17,7 @@ export const handleFbLogin = () => (
 
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-          // User is signed in.
+          this.props.navigation.navigate('Main');
         } else {
           // No user is signed in.
         }

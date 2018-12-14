@@ -7,8 +7,14 @@ import PointScreen from './PointIndex';
 import LoginScreen from './LoginScreen';
 import TestScreen from './TestStackIndex';
 
-const profileURI = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKumwtyvNNvq7clbwOA2XKKPAi4nIwZK_ViJCHGoy-gCx8mfvs';
+import firebase from './config/firebase';
+
+
+
+var profileURI = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKumwtyvNNvq7clbwOA2XKKPAi4nIwZK_ViJCHGoy-gCx8mfvs';
+profileURI = firebase.auth().currentUser.photoURL;
 var displayName = 'ถั่วงอก';
+displayName = firebase.auth().currentUser.displayName;
 
 const { height, width } = Dimensions.get('window');
 const drawerWidth = width * 0.45;
