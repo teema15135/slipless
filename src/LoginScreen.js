@@ -9,8 +9,6 @@ import { fbLoginPermissions } from './constants/index';
 import firebase from './config/firebase';
 import auth from './config/auth';
 import RNFirebase from 'react-native-firebase';
-import FB from './facebookuser';
-import User from './facebookuser';
 
 // import { handleFbLogin } from './lib/auth';
 
@@ -25,12 +23,10 @@ export default class App extends Component {
           .then((token) => {
             var dis = this;
             firebase.auth().signInWithCredential(RNFirebase.auth.FacebookAuthProvider.credential(token))
-            console.log("ได้แล้ว")
       
             firebase.auth().onAuthStateChanged(function(user) {
               if (user) {
                 dis.props.navigation.navigate('Main');
-                new FB(firebase.auth().currentUser);
               } else {
                 // No user is signed in.
               }
@@ -38,11 +34,8 @@ export default class App extends Component {
       
             let fireBaseUser = firebase.auth().currentUser;
             console.log(fireBaseUser);
-      
           })
           .catch((err) => this.onError && this.onError(err))
-      
-      
       );
 
     render() {

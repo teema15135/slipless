@@ -1,13 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
-//API
-
 import React, { Component } from 'react';
 import { Button, TouchableHighlight, StyleSheet, Text, View, ImageBackground, Image } from 'react-native';
 import Barcode from 'react-native-barcode-builder';
@@ -46,10 +36,8 @@ class UserBarcode extends Component {
                 valueOfBarcode: request.response.barcode_num,
             });
         };
-
-        request.open('GET', 'http://10.51.64.40:8065/getBarcode?email=chompu.luffy@gmail.com');
+        request.open('GET', 'http://localhost:8065/getBarcode?email=chompu.luffy@gmail.com');
         request.send();
-        
     }
 
     render() {
@@ -64,20 +52,17 @@ class UserBarcode extends Component {
             );
         }
         return (
-
             <View>
                 <Barcode value={this.state.valueOfBarcode} format="CODE128" />
                 <Text style={styles.valueBarcode}>{this.state.valueOfBarcode}</Text>
                 <Button
                     onPress={this.newBarcode}
                     title="Get New Barcode"
-                />
-                
+                /> 
             </View>
         );
     }
 }
-
 
 export default class HomeBarcode extends React.Component {
     static navigationOptions = {

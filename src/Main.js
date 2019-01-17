@@ -4,7 +4,6 @@ import LoginPage from './LoginScreen';
 import MainPage from './App';
 
 export default class App extends Component {
-
     render() {
         return (
             <ContainerStack />

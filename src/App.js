@@ -5,16 +5,15 @@ import { Text, StyleSheet, Image, SafeAreaView, ScrollView, View, Dimensions } f
 import HomeScreen from './HomeBarcode';
 import PointScreen from './PointIndex';
 import LoginScreen from './LoginScreen';
+import ESlipScreen from './ESlipPage';
 import TestScreen from './TestStackIndex';
 
 import firebase from './config/firebase';
 
-
-
-var profileURI = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKumwtyvNNvq7clbwOA2XKKPAi4nIwZK_ViJCHGoy-gCx8mfvs';
-profileURI = firebase.auth().currentUser.photoURL;
-var displayName = 'ถั่วงอก';
-displayName = firebase.auth().currentUser.displayName;
+// var profileURI = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKumwtyvNNvq7clbwOA2XKKPAi4nIwZK_ViJCHGoy-gCx8mfvs';
+// // profileURI = firebase.auth().currentUser.photoURL;
+// var displayName = 'ถั่วงอก';
+// // displayName = firebase.auth().currentUser.displayName;
 
 const { height, width } = Dimensions.get('window');
 const drawerWidth = width * 0.45;
@@ -27,14 +26,28 @@ export default class App extends React.Component {
   }
 }
 
+/* <SafeAreaView style={styles.sideBarContainer}>
+<View style={styles.profileContainer}>
+  <View style={styles.profileImgContainer}>
+    <Image source={{ uri: firebase.auth().currentUser.photoURL }} style={styles.profileImg} />
+  </View>
+  <View style={styles.profileNameContainer}>
+    <Text style={styles.displayName}>{firebase.auth().currentUser.displayName}</Text>
+  </View>
+</View>
+<ScrollView>
+  <DrawerItems {...props} />
+</ScrollView>
+</SafeAreaView> */
+
 const ProfileComponent = (props) => (
   <SafeAreaView style={styles.sideBarContainer}>
     <View style={styles.profileContainer}>
       <View style={styles.profileImgContainer}>
-        <Image source={{ uri: profileURI }} style={styles.profileImg} />
+        <Image source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKumwtyvNNvq7clbwOA2XKKPAi4nIwZK_ViJCHGoy-gCx8mfvs' }} style={styles.profileImg} />
       </View>
       <View style={styles.profileNameContainer}>
-        <Text style={styles.displayName}>{displayName}</Text>
+        <Text style={styles.displayName}>ถั่วงอก</Text>
       </View>
     </View>
     <ScrollView>
@@ -87,6 +100,7 @@ const styles = StyleSheet.create({
 const Drawer = createDrawerNavigator(
   {
     Home: HomeScreen,
+    Slip: ESlipScreen,
     Point: PointScreen,
     Test: TestScreen,
     Login: LoginScreen,
@@ -103,6 +117,5 @@ const Drawer = createDrawerNavigator(
     },
   },
 );
-
 
 const ContainerDrawer = createAppContainer(Drawer);

@@ -6,9 +6,7 @@ import {
 
 import { slipData } from '../data/historyData';
 
-
 var mainStyle = require('../styles/mainStyle');
-
 
 class SlipFlatListItem extends Component {
     render() {
@@ -37,6 +35,10 @@ class SlipFlatListItem extends Component {
 
 
 export default class ESlipPage extends Component {
+
+    static navigationOptions = {
+        drawerLabel: 'ใบเสร็จของคุณ',
+    };
 
     handleClick = () => {
         alert('Button clicked');

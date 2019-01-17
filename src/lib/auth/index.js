@@ -13,7 +13,6 @@ export const handleFbLogin = () => (
   auth.Facebook.login(fbLoginPermissions)
     .then((token) => {
       firebase.auth().signInWithCredential(RNFirebase.auth.FacebookAuthProvider.credential(token))
-      console.log("ได้แล้ว")
 
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {

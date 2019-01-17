@@ -1,6 +1,4 @@
 import RNFirebase from 'react-native-firebase'
-//import firebase from 'react-native-firebase';
-
 
 const configurationOptions = {
   debug: true
