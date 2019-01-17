@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 import LoginPage from './LoginScreen';
 import MainPage from './App';
+import HistoryPage from './History';
 
 export default class App extends Component {
     render() {
@@ -20,7 +21,11 @@ const Stack = createStackNavigator(
         Main: {
             screen: MainPage,
             path: '/main',
-        }
+        },
+        History: {
+            screen: HistoryPage,
+            path: '/main',
+        },
     },
     {
         initialRouteName: 'Login',
