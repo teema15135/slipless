@@ -1,10 +1,14 @@
 import React from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
-import ESlipScreen from './ESlipPage';
-import BookmarkScreen from './BookmarkIndex';
+import PaymentPage from './PaymentPage';
 
 export default class App extends React.Component {
+    static navigationOptions = {
+        title: 'การใช้จ่าย',
+        headerMode: 'screen',
+    }
+
     render() {
         return(
             <ContainerStack />
@@ -14,19 +18,11 @@ export default class App extends React.Component {
 
 const Stack = createStackNavigator(
     {
-        ESlip: {
-            screen: ESlipScreen,
-            path: '/',
-        },
-        Bookmark: {
-            screen: BookmarkScreen,
-            path: '/bm',
-        },
+        Payment: PaymentPage,
     },
     {
-        initialRouteName: 'ESlip',
+        initialRouteName: 'Payment',
         headerMode: 'none',
-
     }
 )
 

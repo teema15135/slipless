@@ -1,22 +1,17 @@
 import React from "react";
 import { DrawerItems, createAppContainer, createBottomTabNavigator } from 'react-navigation';
-import { Text, StyleSheet, Image, SafeAreaView, ScrollView, View, Dimensions } from 'react-native';
+import { Text, StyleSheet, Image, SafeAreaView, ScrollView, View, Dimensions, ImageBackground } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons';
 
-import HomeScreen from './HomeBarcode';
+import HomeScreen from './HomeIndex';
 import PointScreen from './PointIndex';
 import ESlipScreen from './ESlipIndex';
-
-import firebase from './config/firebase';
-
-// var profileURI = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKumwtyvNNvq7clbwOA2XKKPAi4nIwZK_ViJCHGoy-gCx8mfvs';
-// // profileURI = firebase.auth().currentUser.photoURL;
-// var displayName = 'ถั่วงอก';
-// // displayName = firebase.auth().currentUser.displayName;
+import PaymentPage from './PaymentIndex';
+import RewardScreen from './RewardIndex';
 
 const { height, width } = Dimensions.get('window');
 const drawerWidth = width * 0.45;
-
 
 export default class App extends React.Component {
   render() {
@@ -26,124 +21,88 @@ export default class App extends React.Component {
   }
 }
 
-/* <SafeAreaView style={styles.sideBarContainer}>
-<View style={styles.profileContainer}>
-  <View style={styles.profileImgContainer}>
-    <Image source={{ uri: firebase.auth().currentUser.photoURL }} style={styles.profileImg} />
-  </View>
-  <View style={styles.profileNameContainer}>
-    <Text style={styles.displayName}>{firebase.auth().currentUser.displayName}</Text>
-  </View>
-</View>
-<ScrollView>
-  <DrawerItems {...props} />
-</ScrollView>
-</SafeAreaView> */
-
-// const ProfileComponent = (props) => (
-//   <SafeAreaView style={styles.sideBarContainer}>
-//     <View style={styles.profileContainer}>
-//       <View style={styles.profileImgContainer}>
-//         <Image source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKumwtyvNNvq7clbwOA2XKKPAi4nIwZK_ViJCHGoy-gCx8mfvs' }} style={styles.profileImg} />
-//       </View>
-//       <View style={styles.profileNameContainer}>
-//         <Text style={styles.displayName}>ถั่วงอก</Text>
-//       </View>
-//     </View>
-//     <ScrollView>
-//       <DrawerItems {...props} />
-//     </ScrollView>
-//   </SafeAreaView>
-// )
-
-const styles = StyleSheet.create({
-  // profileImg: {
-  //   height: 45,
-  //   width: 45,
-  //   borderRadius: 40,
-  //   margin: 20,
-  // },
-  // displayName: {
-  //   color: 'white',
-  //   fontSize: 18,
-  //   paddingLeft: 20,
-  //   alignSelf: 'baseline',
-  //   fontFamily: 'Prompt-Light',
-  // },
-  // sideBarContainer: {
-  //   flex: 1,
-  //   backgroundColor: 'rgba(15, 42, 21, 0.93)',
-  // },
-  // profileContainer: {
-  //   height: 80,
-  //   flexDirection: 'row',
-  //   justifyContent: 'flex-start',
-  // },
-  // profileImgContainer: {
-  //   flex: 1,
-  //   flexDirection: 'column',
-  //   justifyContent: 'center',
-  // },
-  // profileNameContainer: {
-  //   flex: 2,
-  //   flexDirection: 'column',
-  //   justifyContent: 'center',
-  // },
-  // labelStyle: {
-  //   color: 'white',
-  //   fontSize: 18,
-  //   fontFamily: 'Prompt-Light',
-  //   fontWeight: '100',
-  // },
-});
-
-// const Drawer = createDrawerNavigator(
-//   {
-//     Home: HomeScreen,
-//     Slip: ESlipScreen,
-//     Point: PointScreen,
-//     Test: TestScreen,
-//   },
-//   {
-//     initialRouteName: 'Home',
-//     useNativeAnimations: 'false',
-//     drawerWidth: drawerWidth,
-//     drawerBackgroundColor: 'transparent',
-//     contentComponent: ProfileComponent,
-//     backBehavior: 'initialRoute',
-//     contentOptions: {
-//       labelStyle: styles.labelStyle,
-//     },
-//   },
-// );
-
 const TabNavigator = createBottomTabNavigator({
-  Home: HomeScreen,
   Slip: ESlipScreen,
-  Point: PointScreen
+  Point: PointScreen,
+  Home: HomeScreen,
+  Payment: PaymentPage,
+  Reward: RewardScreen,
 },
   {
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
         let IconComponent = Ionicons;
+        let SimpleLineIconCompoment = SimpleLineIcon;
         let iconName;
         if (routeName === 'Home') {
-          iconName = 'ios-home';
+          iconName = 'ios-qr-scanner' + (focused ? '' : '-outline');
+          size = 50;
+          return (
+            <ImageBackground source={require('../img/home-icon-bg.png')} style={{
+              width: 120,
+              height: 120,
+              flexDirection: 'column',
+              justifyContent: 'center',
+              elevation: 1,
+              shadowRadius: 100,
+              shadowColor: 'black',
+              shadowOpacity: 0.5,
+              shadowOffset: { width: 10, height: 10 },
+            }}>
+              <IconComponent name={iconName} size={size} color={tintColor} style={{ alignSelf: 'center' }} />
+            </ImageBackground>
+          )
         } else if (routeName === 'Slip') {
-          iconName = 'ios-paper';
+          iconName = 'ios-paper' + (focused ? '' : '-outline');
+          size = 25;
         } else if (routeName === 'Point') {
-          iconName = 'ios-bowtie';
+          iconName = 'ios-bowtie' + (focused ? '' : '-outline');
+          size = 25;
+        } else if (routeName === 'Payment') {
+          iconName = 'ios-cash' + (focused ? '' : '-outline');
+          size = 25;
+        } else if (routeName === 'Reward') {
+          iconName = 'present';
+          size = 25;
+          return <SimpleLineIconCompoment name={iconName} size={size} color={tintColor} />
         }
 
-        return <IconComponent name={iconName} size={25} color={tintColor} />;
+        return <IconComponent name={iconName} size={size} color={tintColor} />;
+      },
+      tabBarLabel: ({ focused, horizontal, tintColor }) => {
+        const { routeName } = navigation.state;
+        let labelName;
+        if (routeName === 'Home') {
+          labelName = '';
+        } else if (routeName === 'Slip') {
+          labelName = 'ใบเสร็จ';
+        } else if (routeName === 'Point') {
+          labelName = 'คะแนน';
+        } else if (routeName === 'Payment') {
+          labelName = 'การใช้จ่าย';
+        } else if (routeName === 'Reward') {
+          labelName = 'สิทธิพิเศษ';
+        }
+
+        return <Text style={style.labelText} >{labelName}</Text>
       }
     }),
     tabBarOptions: {
-      activeTintColor: 'tomato',
+      activeTintColor: 'springgreen',
       inactiveTintColor: 'gray',
     },
+    initialRouteName: 'Home',
   }
 );
 
 const ContainerDrawer = createAppContainer(TabNavigator);
+
+const style = StyleSheet.create({
+  labelText: {
+    fontFamily: 'Prompt-Light',
+    alignSelf: 'center',
+    fontSize: 10,
+    color: '#202020',
+  },
+});

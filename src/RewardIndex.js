@@ -1,8 +1,7 @@
 import React from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
-import ESlipScreen from './ESlipPage';
-import BookmarkScreen from './BookmarkIndex';
+import RewardPage from './RewardPage';
 
 export default class App extends React.Component {
     render() {
@@ -14,19 +13,11 @@ export default class App extends React.Component {
 
 const Stack = createStackNavigator(
     {
-        ESlip: {
-            screen: ESlipScreen,
-            path: '/',
-        },
-        Bookmark: {
-            screen: BookmarkScreen,
-            path: '/bm',
-        },
+        Reward: RewardPage,
     },
     {
-        initialRouteName: 'ESlip',
+        initialRouteName: 'Reward',
         headerMode: 'none',
-
     }
 )
 

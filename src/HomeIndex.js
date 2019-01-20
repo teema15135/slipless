@@ -1,12 +1,13 @@
 import React from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { fromLeft } from 'react-navigation-transitions';
 
-import ESlipScreen from './ESlipPage';
-import BookmarkScreen from './BookmarkIndex';
+import HomePage from './HomeBarcode';
+import ProfilePage from './ProfilePage';
 
 export default class App extends React.Component {
     render() {
-        return(
+        return (
             <ContainerStack />
         );
     }
@@ -14,19 +15,17 @@ export default class App extends React.Component {
 
 const Stack = createStackNavigator(
     {
-        ESlip: {
-            screen: ESlipScreen,
-            path: '/',
+        Home: {
+            screen: HomePage,
         },
-        Bookmark: {
-            screen: BookmarkScreen,
-            path: '/bm',
-        },
+        Profile: {
+            screen: ProfilePage,
+        }
     },
     {
-        initialRouteName: 'ESlip',
+        initialRouteName: 'Home',
         headerMode: 'none',
-
+        transitionConfig: () => fromLeft(1000),
     }
 )
 

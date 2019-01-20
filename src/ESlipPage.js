@@ -58,14 +58,19 @@ export default class ESlipPage extends Component {
                                     <Text style={{ fontFamily: 'Poppins-Light', fontSize: 20, color: 'white', alignSelf: 'center' }}>e-slip</Text>
                                 </View>
                                 <View style={{ flex: 1 }}>
-
+                                    <TouchableHighlight style={{width: 50, height: 50, position: 'absolute', top: 20}}
+                                    onPress={() => {
+                                        this.props.navigation.navigate('Bookmark');
+                                    }}>
+                                        <Text>BM</Text>
+                                    </TouchableHighlight>
                                 </View>
                             </View>
                         </View>
                     </ImageBackground>
                 </View>
                 <View style={{ flex: 3, flexDirection: 'column', justifyContent: 'flex-start', backgroundColor: '#ECECEC' }}>
-                    <View style={{ height: 300 }}>
+                    <View style={{ position: 'absolute', top: -50, height: 330 }}>
                         <FlatList
                             style={{
                                 marginLeft: 20

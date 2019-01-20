@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Button, TouchableHighlight, StyleSheet, Text, View, ImageBackground, Image } from 'react-native';
+import { Button, TouchableHighlight, StyleSheet, Text, View, ImageBackground, Image, TouchableWithoutFeedback } from 'react-native';
 import Barcode from 'react-native-barcode-builder';
+import IconComponent from 'react-native-vector-icons/Ionicons'
 import firebase from './config/firebase';
+import { Color } from './config/color';
 
 // const instructions = Platform.select({
 //   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -51,9 +53,9 @@ class UserBarcode extends Component {
                     <View style={{ flex: 1, flexDirection: 'column' }}>
                     </View>
                     <View style={{ flex: 3, flexDirection: 'column' }}>
-                        <TouchableHighlight onPress={this.getBarcode}>
+                        <TouchableWithoutFeedback onPress={this.getBarcode}>
                             <Image source={require('../img/coin.png')} style={{ width: 25, height: 25, alignSelf: 'center' }} />
-                        </TouchableHighlight>
+                        </TouchableWithoutFeedback>
                     </View>
                 </View>
             );
@@ -65,9 +67,9 @@ class UserBarcode extends Component {
                     <Text style={styles.valueBarcode}>{this.state.valueOfBarcode}</Text>
                 </View>
                 <View style={{ flex: 1, flexDirection: 'column' }}>
-                    <TouchableHighlight onPress={this.getBarcode}>
+                    <TouchableWithoutFeedback onPress={this.getBarcode}>
                         <Image source={require('../img/coin.png')} style={{ width: 25, height: 25, alignSelf: 'center' }} />
-                    </TouchableHighlight>
+                    </TouchableWithoutFeedback>
                 </View>
             </View>
         );
@@ -89,7 +91,16 @@ export default class HomeBarcode extends React.Component {
                         {/* <TouchableHighlight style={styles.menuButtonContainer} onPress={() => this.props.navigation.openDrawer()}>
                             <Image source={require('../img/menu.png')} style={styles.menuButton} />
                         </TouchableHighlight> */}
-                        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center' }}>
+                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'flex-end', marginRight: 30 }}>
+                            <TouchableHighlight style={{  flexDirection: 'row', justifyContent: 'center', borderRadius: 25, width:35, height: 35 }}
+                                underlayColor={Color.highlightPress}
+                                onPress={() => {
+                                    this.props.navigation.navigate('Profile');
+                                }}>
+                                <IconComponent name='md-contact' size={35} color='white' />
+                            </TouchableHighlight>
+                        </View>
+                        <View style={{ flex: 5, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center' }}>
                             <Text style={styles.slipless}>Slipless</Text>
                         </View>
                     </ImageBackground>
@@ -97,7 +108,7 @@ export default class HomeBarcode extends React.Component {
                 <View style={styles.containerBottom}>
                     <UserBarcode></UserBarcode>
                 </View>
-            </View>
+            </View >
         );
     }
 }
@@ -109,18 +120,18 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start'
     },
     containerTop: {
-        flex: 10,
+        flex: 1,
     },
     containerBottom: {
-        flex: 11,
+        flex: 1,
         backgroundColor: 'white'
     },
     slipless: {
-        fontSize: 50,
+        fontSize: 43,
         textAlign: 'center',
         fontWeight: '200',
         margin: 10,
-        marginTop: 25,
+        marginTop: 15,
         color: 'white',
         fontFamily: 'Lobster-Regular',
     },
