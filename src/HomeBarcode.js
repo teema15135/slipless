@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, TouchableHighlight, StyleSheet, Text, View, ImageBackground, Image } from 'react-native';
 import Barcode from 'react-native-barcode-builder';
+import firebase from './config/firebase';
 
 // const instructions = Platform.select({
 //   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -10,6 +11,8 @@ import Barcode from 'react-native-barcode-builder';
 // });
 
 // const valueOfBarcode = "593040659-4";
+
+// const userID = firebase.auth().currentUser.uid;
 
 class UserBarcode extends Component {
 
@@ -25,10 +28,12 @@ class UserBarcode extends Component {
         this.newBarcode;
     }
 
-    newBarcode = () => {
+    getBarcode = () => {
         var request = new XMLHttpRequest();
-        request.responseType = 'json';
         var comp = this;
+        request.open('GET', 'http://78a78cfd.ngrok.io/getBarcode?uid=jifUBEXSfGVpkLHKyOHZDsVGS042');
+        request.responseType = 'json';
+        request.send();
         request.onload = function () {
             console.log(request.response);
             comp.setState({
@@ -36,39 +41,46 @@ class UserBarcode extends Component {
                 valueOfBarcode: request.response.barcode_num,
             });
         };
-        request.open('GET', 'http://localhost:8065/getBarcode?email=chompu.luffy@gmail.com');
-        request.send();
+
     }
 
     render() {
         if (this.state.isLoading) {
             return (
-                <View>
-                <Button
-                    onPress={this.newBarcode}
-                    title="Get New Barcode"
-                />
+                <View style={{ flex: 1, flexDirection: 'column' }}>
+                    <View style={{ flex: 1, flexDirection: 'column' }}>
+                    </View>
+                    <View style={{ flex: 3, flexDirection: 'column' }}>
+                        <TouchableHighlight onPress={this.getBarcode}>
+                            <Image source={require('../img/coin.png')} style={{ width: 25, height: 25, alignSelf: 'center' }} />
+                        </TouchableHighlight>
+                    </View>
                 </View>
             );
         }
         return (
-            <View>
-                <Barcode value={this.state.valueOfBarcode} format="CODE128" />
-                <Text style={styles.valueBarcode}>{this.state.valueOfBarcode}</Text>
-                <Button
-                    onPress={this.newBarcode}
-                    title="Get New Barcode"
-                /> 
+            <View style={{ flex: 1, flexDirection: 'column' }}>
+                <View style={{ flex: 2, flexDirection: 'column' }}>
+                    <Barcode value={this.state.valueOfBarcode} format="CODE128" />
+                    <Text style={styles.valueBarcode}>{this.state.valueOfBarcode}</Text>
+                </View>
+                <View style={{ flex: 1, flexDirection: 'column' }}>
+                    <TouchableHighlight onPress={this.getBarcode}>
+                        <Image source={require('../img/coin.png')} style={{ width: 25, height: 25, alignSelf: 'center' }} />
+                    </TouchableHighlight>
+                </View>
             </View>
         );
     }
 }
 
-export default class HomeBarcode extends React.Component {
-    static navigationOptions = {
-        drawerLabel: 'บาร์โค้ด',
-    };
+class GetBarcodeButton extends Component {
+    constructor(props) {
+        super(props);
+    }
+}
 
+export default class HomeBarcode extends React.Component {
     render() {
         return (
             <View style={styles.container}>

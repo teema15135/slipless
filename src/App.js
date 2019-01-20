@@ -5,9 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import HomeScreen from './HomeBarcode';
 import PointScreen from './PointIndex';
-import LoginScreen from './LoginScreen';
-import ESlipScreen from './ESlipPage';
-import TestScreen from './TestStackIndex';
+import ESlipScreen from './ESlipIndex';
 
 import firebase from './config/firebase';
 
@@ -18,6 +16,7 @@ import firebase from './config/firebase';
 
 const { height, width } = Dimensions.get('window');
 const drawerWidth = width * 0.45;
+
 
 export default class App extends React.Component {
   render() {
