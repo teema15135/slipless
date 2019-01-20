@@ -1,6 +1,7 @@
 import React from "react";
-import { DrawerItems, createAppContainer, createDrawerNavigator } from 'react-navigation';
+import { DrawerItems, createAppContainer, createBottomTabNavigator } from 'react-navigation';
 import { Text, StyleSheet, Image, SafeAreaView, ScrollView, View, Dimensions } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import HomeScreen from './HomeBarcode';
 import PointScreen from './PointIndex';
@@ -40,82 +41,110 @@ export default class App extends React.Component {
 </ScrollView>
 </SafeAreaView> */
 
-const ProfileComponent = (props) => (
-  <SafeAreaView style={styles.sideBarContainer}>
-    <View style={styles.profileContainer}>
-      <View style={styles.profileImgContainer}>
-        <Image source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKumwtyvNNvq7clbwOA2XKKPAi4nIwZK_ViJCHGoy-gCx8mfvs' }} style={styles.profileImg} />
-      </View>
-      <View style={styles.profileNameContainer}>
-        <Text style={styles.displayName}>ถั่วงอก</Text>
-      </View>
-    </View>
-    <ScrollView>
-      <DrawerItems {...props} />
-    </ScrollView>
-  </SafeAreaView>
-)
+// const ProfileComponent = (props) => (
+//   <SafeAreaView style={styles.sideBarContainer}>
+//     <View style={styles.profileContainer}>
+//       <View style={styles.profileImgContainer}>
+//         <Image source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKumwtyvNNvq7clbwOA2XKKPAi4nIwZK_ViJCHGoy-gCx8mfvs' }} style={styles.profileImg} />
+//       </View>
+//       <View style={styles.profileNameContainer}>
+//         <Text style={styles.displayName}>ถั่วงอก</Text>
+//       </View>
+//     </View>
+//     <ScrollView>
+//       <DrawerItems {...props} />
+//     </ScrollView>
+//   </SafeAreaView>
+// )
 
 const styles = StyleSheet.create({
-  profileImg: {
-    height: 45,
-    width: 45,
-    borderRadius: 40,
-    margin: 20,
-  },
-  displayName: {
-    color: 'white',
-    fontSize: 18,
-    paddingLeft: 20,
-    alignSelf: 'baseline',
-    fontFamily: 'Prompt-Light',
-  },
-  sideBarContainer: {
-    flex: 1,
-    backgroundColor: 'rgba(15, 42, 21, 0.93)',
-  },
-  profileContainer: {
-    height: 80,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-  },
-  profileImgContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-  profileNameContainer: {
-    flex: 2,
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-  labelStyle: {
-    color: 'white',
-    fontSize: 18,
-    fontFamily: 'Prompt-Light',
-    fontWeight: '100',
-  },
+  // profileImg: {
+  //   height: 45,
+  //   width: 45,
+  //   borderRadius: 40,
+  //   margin: 20,
+  // },
+  // displayName: {
+  //   color: 'white',
+  //   fontSize: 18,
+  //   paddingLeft: 20,
+  //   alignSelf: 'baseline',
+  //   fontFamily: 'Prompt-Light',
+  // },
+  // sideBarContainer: {
+  //   flex: 1,
+  //   backgroundColor: 'rgba(15, 42, 21, 0.93)',
+  // },
+  // profileContainer: {
+  //   height: 80,
+  //   flexDirection: 'row',
+  //   justifyContent: 'flex-start',
+  // },
+  // profileImgContainer: {
+  //   flex: 1,
+  //   flexDirection: 'column',
+  //   justifyContent: 'center',
+  // },
+  // profileNameContainer: {
+  //   flex: 2,
+  //   flexDirection: 'column',
+  //   justifyContent: 'center',
+  // },
+  // labelStyle: {
+  //   color: 'white',
+  //   fontSize: 18,
+  //   fontFamily: 'Prompt-Light',
+  //   fontWeight: '100',
+  // },
 });
 
-const Drawer = createDrawerNavigator(
+// const Drawer = createDrawerNavigator(
+//   {
+//     Home: HomeScreen,
+//     Slip: ESlipScreen,
+//     Point: PointScreen,
+//     Test: TestScreen,
+//   },
+//   {
+//     initialRouteName: 'Home',
+//     useNativeAnimations: 'false',
+//     drawerWidth: drawerWidth,
+//     drawerBackgroundColor: 'transparent',
+//     contentComponent: ProfileComponent,
+//     backBehavior: 'initialRoute',
+//     contentOptions: {
+//       labelStyle: styles.labelStyle,
+//     },
+//   },
+// );
+
+const TabNavigator = createBottomTabNavigator({
+  Home: HomeScreen,
+  Slip: ESlipScreen,
+  Point: PointScreen
+},
   {
-    Home: HomeScreen,
-    Slip: ESlipScreen,
-    Point: PointScreen,
-    Test: TestScreen,
-    Login: LoginScreen,
-  },
-  {
-    initialRouteName: 'Home',
-    useNativeAnimations: 'false',
-    drawerWidth: drawerWidth,
-    drawerBackgroundColor: 'transparent',
-    contentComponent: ProfileComponent,
-    backBehavior: 'initialRoute',
-    contentOptions: {
-      labelStyle: styles.labelStyle,
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        const { routeName } = navigation.state;
+        let IconComponent = Ionicons;
+        let iconName;
+        if (routeName === 'Home') {
+          iconName = 'ios-home';
+        } else if (routeName === 'Slip') {
+          iconName = 'ios-paper';
+        } else if (routeName === 'Point') {
+          iconName = 'ios-bowtie';
+        }
+
+        return <IconComponent name={iconName} size={25} color={tintColor} />;
+      }
+    }),
+    tabBarOptions: {
+      activeTintColor: 'tomato',
+      inactiveTintColor: 'gray',
     },
-  },
+  }
 );
 
-const ContainerDrawer = createAppContainer(Drawer);
+const ContainerDrawer = createAppContainer(TabNavigator);

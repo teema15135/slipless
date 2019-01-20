@@ -52,7 +52,7 @@ export default class ESlipPage extends Component {
                         <View style={{ flexDirection: 'column'}}>
                             <View style={{ flex: 1, flexDirection: 'row', marginTop: 10 }}>
                                 <View style={{ flex: 1 }}>
-                                    <Image style={{ top: 5, left: 5, width: 20, height: 20, marginLeft: 15 }} source={require('../img/left_arrow.png')} />
+                                    {/* <Image style={{ top: 5, left: 5, width: 20, height: 20, marginLeft: 15 }} source={require('../img/left_arrow.png')} /> */}
                                 </View>
                                 <View style={{ flex: 3 }}>
                                     <Text style={{ fontFamily: 'Poppins-Light', fontSize: 20, color: 'white', alignSelf: 'center' }}>e-slip</Text>

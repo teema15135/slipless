@@ -21,11 +21,7 @@ const Stack = createStackNavigator(
         Main: {
             screen: MainPage,
             path: '/main',
-        },
-        History: {
-            screen: HistoryPage,
-            path: '/main',
-        },
+        }
     },
     {
         initialRouteName: 'Login',

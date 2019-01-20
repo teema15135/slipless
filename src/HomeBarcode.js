@@ -74,9 +74,9 @@ export default class HomeBarcode extends React.Component {
             <View style={styles.container}>
                 <View style={styles.containerTop}>
                     <ImageBackground source={require('../img/darkforest.png')} style={styles.imageBG}>
-                        <TouchableHighlight style={styles.menuButtonContainer} onPress={() => this.props.navigation.openDrawer()}>
+                        {/* <TouchableHighlight style={styles.menuButtonContainer} onPress={() => this.props.navigation.openDrawer()}>
                             <Image source={require('../img/menu.png')} style={styles.menuButton} />
-                        </TouchableHighlight>
+                        </TouchableHighlight> */}
                         <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center' }}>
                             <Text style={styles.slipless}>Slipless</Text>
                         </View>

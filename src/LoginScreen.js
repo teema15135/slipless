@@ -12,8 +12,6 @@ import { fbLoginPermissions } from "./constants/index";
 import firebase from "./config/firebase";
 import auth from "./config/auth";
 import RNFirebase from "react-native-firebase";
-import FB from "./facebookuser";
-import User from "./facebookuser";
 //import CombinedButton from "react-native-combined-button";
 
 // import { handleFbLogin } from './lib/auth';
@@ -38,7 +36,6 @@ export default class App extends Component {
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
             dis.props.navigation.navigate("Main");
-            new FB(firebase.auth().currentUser);
           } else {
             // No user is signed in.
           }
