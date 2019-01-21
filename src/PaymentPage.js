@@ -38,7 +38,7 @@ export default class PaymentPage extends Component {
         return (
             <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
                 <View style={{ flex: 2 }}>
-                    <ImageBackground source={require('../img/darkforest.png')} style={mainStyle.imageBG}>
+                    <ImageBackground source={require('../img/glass-green-water-blur.png')} style={mainStyle.imageBG}>
                         <View style={{ flexDirection: 'column' }}>
                             <View style={{ flex: 1, flexDirection: 'row', marginTop: 10 }}>
                                 <View style={{ flex: 1 }}>

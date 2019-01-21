@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {
     Platform, StyleSheet, Text, View, Image, ImageBackground,
-    TouchableHighlight, Button, FlatList
+    TouchableWithoutFeedback, Button, FlatList
 } from 'react-native';
+import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { slipData } from '../data/historyData';
 
@@ -33,8 +34,35 @@ class SlipFlatListItem extends Component {
     }
 }
 
+class MaterialIconChangeColor extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            bookmarkColor: 'white'
+        }
+    }
+}
+
 
 export default class ESlipPage extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            bookmarkColor: 'white'
+        }
+    }
+
+    changeColor = () => {
+        if(this.state.bookmarkColor == 'pink')
+            this.setState({
+                bookmarkColor: 'white'
+            });
+        else
+            this.setState({
+                bookmarkColor: 'pink'
+            });
+    }
 
     static navigationOptions = {
         drawerLabel: 'ใบเสร็จของคุณ',
@@ -48,22 +76,26 @@ export default class ESlipPage extends Component {
         return (
             <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
                 <View style={{ flex: 2 }}>
-                    <ImageBackground source={require('../img/darkforest.png')} style={mainStyle.imageBG}>
-                        <View style={{ flexDirection: 'column'}}>
-                            <View style={{ flex: 1, flexDirection: 'row', marginTop: 10 }}>
-                                <View style={{ flex: 1 }}>
-                                    {/* <Image style={{ top: 5, left: 5, width: 20, height: 20, marginLeft: 15 }} source={require('../img/left_arrow.png')} /> */}
-                                </View>
-                                <View style={{ flex: 3 }}>
-                                    <Text style={{ fontFamily: 'Poppins-Light', fontSize: 20, color: 'white', alignSelf: 'center' }}>e-slip</Text>
-                                </View>
-                                <View style={{ flex: 1 }}>
-                                    <TouchableHighlight style={{width: 50, height: 50, position: 'absolute', top: 20}}
-                                    onPress={() => {
-                                        this.props.navigation.navigate('Bookmark');
-                                    }}>
-                                        <Text>BM</Text>
-                                    </TouchableHighlight>
+                    <ImageBackground source={require('../img/glass-green-water-blur.png')} style={{
+                        flex: 1,
+                        width: '100%',
+                        flexDirection: 'column',
+                        justifyContent: 'flex-start',
+                    }}>
+                        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
+                            <View style={{ flex: 1 }}>
+                                <Text style={{ fontFamily: 'Poppins-Bold', fontSize: 35, color: 'white', alignSelf: 'center', marginTop: 20 }}>e-slip</Text>
+                            </View>
+                            <View style={{ flex: 4, flexDirection: 'row', justifyContent: 'flex-end' }}>
+                                <View style={{ width: 40, flexDirection: 'column', justifyContent: 'center' }}>
+                                    <TouchableWithoutFeedback style={{ width: 50, height: 50 }}
+                                        onPress={() => {
+                                            this.changeColor();
+                                            setTimeout(this.changeColor, 300);
+                                            this.props.navigation.navigate('Bookmark');
+                                        }}>
+                                        <MaterialIcon name={'tag-heart'} size={30} color={this.state.bookmarkColor} />
+                                    </TouchableWithoutFeedback>
                                 </View>
                             </View>
                         </View>
@@ -88,7 +120,7 @@ export default class ESlipPage extends Component {
                         </FlatList>
                     </View>
                 </View>
-            </View>
+            </View >
         );
     }
 }

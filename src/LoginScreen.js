@@ -17,9 +17,6 @@ import RNFirebase from "react-native-firebase";
 // import { handleFbLogin } from './lib/auth';
 
 export default class App extends Component {
-  // static navigationOptions = {
-  //     drawerLabel: 'login',
-  // };
 
   handleFbLogin = () =>
     //firebase.auth().createUserWithEmailAndPassword("test@mail.com", "123456")

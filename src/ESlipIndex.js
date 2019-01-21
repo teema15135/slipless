@@ -4,6 +4,8 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import ESlipScreen from './ESlipPage';
 import BookmarkScreen from './BookmarkIndex';
 
+import { fromLeft } from 'react-navigation-transitions';
+
 export default class App extends React.Component {
     render() {
         return(
@@ -26,7 +28,7 @@ const Stack = createStackNavigator(
     {
         initialRouteName: 'ESlip',
         headerMode: 'none',
-
+        transitionConfig: () => fromLeft(1000)
     }
 )
 

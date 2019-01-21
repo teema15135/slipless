@@ -4,15 +4,7 @@ import Barcode from 'react-native-barcode-builder';
 import IconComponent from 'react-native-vector-icons/Ionicons'
 import firebase from './config/firebase';
 import { Color } from './config/color';
-
-// const instructions = Platform.select({
-//   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-//   android:
-//     'Double tap R on your keyboard to reload,\n' +
-//     'Shake or press menu button for dev menu',
-// });
-
-// const valueOfBarcode = "593040659-4";
+import { Server } from './config/server';
 
 // const userID = firebase.auth().currentUser.uid;
 
@@ -27,23 +19,21 @@ class UserBarcode extends Component {
     }
 
     componentDidMount() {
-        this.newBarcode;
+        this.getBarcode();
     }
 
     getBarcode = () => {
         var request = new XMLHttpRequest();
         var comp = this;
-        request.open('GET', 'http://78a78cfd.ngrok.io/getBarcode?uid=jifUBEXSfGVpkLHKyOHZDsVGS042');
+        request.open('GET', Server.path + '/getBarcode?uid=jifUBEXSfGVpkLHKyOHZDsVGS042');
         request.responseType = 'json';
         request.send();
         request.onload = function () {
-            console.log(request.response);
             comp.setState({
                 isLoading: false,
                 valueOfBarcode: request.response.barcode_num,
             });
-        };
-
+        }
     }
 
     render() {
@@ -61,16 +51,9 @@ class UserBarcode extends Component {
             );
         }
         return (
-            <View style={{ flex: 1, flexDirection: 'column' }}>
-                <View style={{ flex: 2, flexDirection: 'column' }}>
-                    <Barcode value={this.state.valueOfBarcode} format="CODE128" />
-                    <Text style={styles.valueBarcode}>{this.state.valueOfBarcode}</Text>
-                </View>
-                <View style={{ flex: 1, flexDirection: 'column' }}>
-                    <TouchableWithoutFeedback onPress={this.getBarcode}>
-                        <Image source={require('../img/coin.png')} style={{ width: 25, height: 25, alignSelf: 'center' }} />
-                    </TouchableWithoutFeedback>
-                </View>
+            <View style={{ flex: 1, flexDirection: 'column' , justifyContent: 'center',}}>
+                <Barcode value={this.state.valueOfBarcode} format="CODE128" />
+                <Text style={styles.valueBarcode}>{this.state.valueOfBarcode}</Text>
             </View>
         );
     }
@@ -87,12 +70,12 @@ export default class HomeBarcode extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={styles.containerTop}>
-                    <ImageBackground source={require('../img/darkforest.png')} style={styles.imageBG}>
+                    <ImageBackground source={require('../img/glass-green-water-blur.png')} style={styles.imageBG}>
                         {/* <TouchableHighlight style={styles.menuButtonContainer} onPress={() => this.props.navigation.openDrawer()}>
                             <Image source={require('../img/menu.png')} style={styles.menuButton} />
                         </TouchableHighlight> */}
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'flex-end', marginRight: 30 }}>
-                            <TouchableHighlight style={{  flexDirection: 'row', justifyContent: 'center', borderRadius: 25, width:35, height: 35 }}
+                            <TouchableHighlight style={{ elevation: 50, flexDirection: 'row', justifyContent: 'center', borderRadius: 25, width: 35, height: 35 }}
                                 underlayColor={Color.highlightPress}
                                 onPress={() => {
                                     this.props.navigation.navigate('Profile');
@@ -121,6 +104,8 @@ const styles = StyleSheet.create({
     },
     containerTop: {
         flex: 1,
+        elevation: 10,
+        backgroundColor: 'white',
     },
     containerBottom: {
         flex: 1,
@@ -134,6 +119,7 @@ const styles = StyleSheet.create({
         marginTop: 15,
         color: 'white',
         fontFamily: 'Lobster-Regular',
+        elevation: 50,
     },
     valueBarcode: {
         textAlign: 'center',
@@ -143,10 +129,7 @@ const styles = StyleSheet.create({
     imageBG: {
         flex: 1,
         width: '100%',
-    },
-    menuButton: {
-        width: 25,
-        height: 25,
+        elevation: 2,
     },
     menuButtonContainer: {
         width: 25,

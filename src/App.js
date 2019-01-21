@@ -85,11 +85,11 @@ const TabNavigator = createBottomTabNavigator({
           labelName = 'สิทธิพิเศษ';
         }
 
-        return <Text style={style.labelText} >{labelName}</Text>
+        return <Text style={style.labelText}>{labelName}</Text>
       }
     }),
     tabBarOptions: {
-      activeTintColor: 'springgreen',
+      activeTintColor: 'green',
       inactiveTintColor: 'gray',
     },
     initialRouteName: 'Home',
