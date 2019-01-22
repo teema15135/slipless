@@ -1,6 +1,6 @@
 import React from "react";
 import { DrawerItems, createAppContainer, createBottomTabNavigator } from 'react-navigation';
-import { Text, StyleSheet, Image, SafeAreaView, ScrollView, View, Dimensions, ImageBackground } from 'react-native';
+import { Text, StyleSheet, Image, SafeAreaView, ScrollView, View, ImageBackground } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons';
 
@@ -9,9 +9,6 @@ import PointScreen from './PointIndex';
 import ESlipScreen from './ESlipIndex';
 import PaymentPage from './PaymentIndex';
 import RewardScreen from './RewardIndex';
-
-const { height, width } = Dimensions.get('window');
-const drawerWidth = width * 0.45;
 
 export default class App extends React.Component {
   render() {
@@ -36,7 +33,7 @@ const TabNavigator = createBottomTabNavigator({
         let SimpleLineIconCompoment = SimpleLineIcon;
         let iconName;
         if (routeName === 'Home') {
-          iconName = 'ios-qr-scanner' + (focused ? '' : '-outline');
+          iconName = 'ios-qr-scanner';
           size = 50;
           return (
             <ImageBackground source={require('../img/home-icon-bg.png')} style={{
@@ -54,14 +51,17 @@ const TabNavigator = createBottomTabNavigator({
             </ImageBackground>
           )
         } else if (routeName === 'Slip') {
-          iconName = 'ios-paper' + (focused ? '' : '-outline');
+          iconName = 'md-paper';
           size = 25;
+          return <IconComponent name={iconName} size={size} color={tintColor} />;
         } else if (routeName === 'Point') {
-          iconName = 'ios-bowtie' + (focused ? '' : '-outline');
+          iconName = 'trophy';
           size = 25;
+          return <SimpleLineIconCompoment name={iconName} size={size} color={tintColor} />
         } else if (routeName === 'Payment') {
-          iconName = 'ios-cash' + (focused ? '' : '-outline');
+          iconName = 'md-cash';
           size = 25;
+          return <IconComponent name={iconName} size={size} color={tintColor} />;
         } else if (routeName === 'Reward') {
           iconName = 'present';
           size = 25;

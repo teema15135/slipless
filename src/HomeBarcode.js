@@ -34,6 +34,12 @@ class UserBarcode extends Component {
                 valueOfBarcode: request.response.barcode_num,
             });
         }
+        request.onerror = function () {
+            comp.setState({
+                isLoading: true,
+                valueOfBarcode: 'server is down'
+            })
+        }
     }
 
     render() {
