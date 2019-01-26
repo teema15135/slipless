@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {
-    Platform, StyleSheet, Text, View, Image, ImageBackground,
-    FlatList, Alert, TouchableHighlight, TouchableOpacity,
-    TouchableWithoutFeedback, StatusBar
-    } from 'react-native';
+    Platform, StyleSheet, Text, View, ImageBackground,
+    FlatList, Alert, TouchableOpacity, StatusBar
+} from 'react-native';
 import Modal from "react-native-modal";
 import Icon from "react-native-vector-icons/Ionicons";
+import { Item } from 'native-base';
 
 var mainStyle = require('../styles/mainStyle');
 
@@ -29,6 +29,7 @@ const list = [
 ];
 
 class RewardList extends Component {
+
     render() {
         return (
             <View
@@ -42,12 +43,29 @@ class RewardList extends Component {
                     borderRadius: 10,
                     margin: 4,
                 }}>
-                <Text style={{
-                    fontSize: 16,
-                    fontWeight: 'bold',
-                    color: 'grey',
-                    margin: 20
-                }}>{this.props.item.key}</Text>
+                <View style={{flexDirection: 'row', width: 300, justifyContent:'space-between', marginTop:5}}>
+                    <View></View>
+                    <View>
+                        <Text style={{
+                            fontFamily: 'Prompt-Medium',
+                            fontSize: 16,
+                            color: 'grey',
+                            margin: 20,
+                        }}>{this.props.item.key}</Text>
+                    </View>
+                    <View>
+                        <TouchableOpacity onPress={MyList._showAlert}>
+                            <Icon
+                                name="ios-trash"
+                                color="#21a775"
+                                size={30}
+                            />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <View>
+
+                </View>
             </View>
         );
     }
@@ -66,6 +84,25 @@ export default class MyList extends React.PureComponent {
     space() {
         return (<View style={{ height: 1, width: '100%', backgroundColor: '#ececec' }} />)
     }
+
+    static _showAlert = () => {
+        Alert.alert(
+            'ยืนยันการลบคูปอง',
+            'ยังลบไม่ได้จ้า กร๊าก ยากมากแม่',
+            [
+                {
+                    text: 'OK',
+                    style: 'OK',
+                },
+                {
+                    text: 'Cancel',
+                    style:'cancel',
+                }
+            ],
+            {cancelable:false},
+        );
+    }
+
 
     render() {
         return (
@@ -96,10 +133,6 @@ export default class MyList extends React.PureComponent {
                         )}
                     />
 
-                    {/* <TouchableOpacity onPress={this._toggleModal}>
-                        <Text>Show Modal</Text>
-                    </TouchableOpacity> */}
-
                     <Modal
                         animationIn='slideInUp'
                         animationOut='slideOutDown'
@@ -118,17 +151,19 @@ export default class MyList extends React.PureComponent {
                             <View>
                                 <FlatList
                                     // style={{ marginTop: 30, width: '100%'}}
+                                    showsVerticalScrollIndicator={false}
+                                    showsHorizontalScrollIndicator={false}
                                     data={[
-                                        { key: 'task 1' },
-                                        { key: 'task 2' },
-                                        { key: 'task 3' },
-                                        { key: 'task 4' },
-                                        { key: 'task 5' },
-                                        { key: 'task 6' },
-                                        { key: 'task 7' },
-                                        { key: 'task 8' },
-                                        { key: 'task 9' },
-                                        { key: 'task 10' }
+                                        { key: 'สิทธิ์ 1' },
+                                        { key: 'สิทธิ์ 2' },
+                                        { key: 'สิทธิ์ 3' },
+                                        { key: 'สิทธิ์ 4' },
+                                        { key: 'สิทธิ์ 5' },
+                                        { key: 'สิทธิ์ 6' },
+                                        { key: 'สิทธิ์ 7' },
+                                        { key: 'สิทธิ์ 8' },
+                                        { key: 'สิทธิ์ 9' },
+                                        { key: 'สิทธิ์ 10' }
                                     ]}
                                     renderItem={({ item, index }) => {
                                         return (
