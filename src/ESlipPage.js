@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {
     Platform, StyleSheet, Text, View, Image, ImageBackground,
-    TouchableWithoutFeedback, Button, FlatList, TouchableHighlight
+    TouchableWithoutFeedback, Button, FlatList, TouchableHighlight,TouchableOpacity
 } from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from "react-native-vector-icons/Ionicons";
 
 import { Server } from './config/server';
 import { slipData } from '../data/historyData';
@@ -125,7 +126,7 @@ export default class ESlipPage extends Component {
         }
         return (
             <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
-                <View style={{ flex: 2 }}>
+                <View style={{ flex: 1 }}>
                     <ImageBackground source={require('../img/glass-green-water-blur.png')} style={{
                         flex: 1,
                         width: '100%',
@@ -134,29 +135,29 @@ export default class ESlipPage extends Component {
                     }}>
                         <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
                             <View style={{ flex: 1 }}>
-                                <Text style={{ fontFamily: 'Poppins-Bold', fontSize: 35, color: 'white', alignSelf: 'center', marginTop: 20 }}>e-slip</Text>
+                                <Text style={{ fontFamily: 'Prompt-Light', fontSize: 30, color: 'white', alignSelf: 'center', marginTop: 40 }}>e-slip</Text>
                             </View>
-                            <View style={{ flex: 4, flexDirection: 'row', justifyContent: 'flex-end' }}>
+                            <View style={{ flex: 4, flexDirection: 'row', justifyContent: 'flex-end', top: -20 }}>
                                 <View style={{ width: 40, flexDirection: 'column', justifyContent: 'center' }}>
-                                    <TouchableWithoutFeedback style={{ width: 50, height: 50 }}
+                                    <TouchableOpacity style={{ width: 50, height: 50,elevation: 2 }}
                                         onPress={() => {
                                             this.changeColor();
                                             setTimeout(this.changeColor, 300);
                                             this.props.navigation.navigate('Bookmark');
                                         }}>
-                                        <MaterialIcon name={'heart-circle-outline'} size={30} color={this.state.bookmarkColor} />
-                                    </TouchableWithoutFeedback>
+                                        <Icon name={'ios-star'} size={30} color='white' />
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                         </View>
                     </ImageBackground>
                 </View>
-                <View style={{ flex: 3, flexDirection: 'column', justifyContent: 'flex-end', backgroundColor: '#ECECEC' }}>
-                    <View style={{ position: 'absolute', top: -50, height: 330 }}>
+                <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-end', backgroundColor: '#ECECEC' }}>
+                    <View style={{ position: 'absolute', top: -120, height: 330 }}>
                         <FlatList
+                            showsHorizontalScrollIndicator={false}
                             style={{
                                 marginLeft: 20
-                                //backgroundColor: 'white',
                             }}
                             horizontal={true}
                             data={this.state.slips}
@@ -169,28 +170,27 @@ export default class ESlipPage extends Component {
                     </View>
                     <View style={{
                         marginBottom: 40,
-                        borderWidth: 2, 
-                        orderColor: 'black',
                         flexDirection: 'row',
                         justifyContent: 'center',
                         }}>
-                        <TouchableHighlight
+                        <TouchableOpacity
                             onPress={() => {
                                 // go to all slip page
                             }}
                             style={{
                                 flexDirection: 'column',
-                                backgroundColor: 'green',
-                                width: 150,
-                                height: 30,
+                                backgroundColor: '#21a775',
+                                width: 140,
+                                height: 25,
                                 justifyContent: 'center',
                                 alignContent: 'center',
-                                elevation: 3,
-                                borderRadius: 15
+                                marginTop: 7,
+                                elevation: 1,
+                                borderRadius: 10
                             }}
                         >
-                            <Text style={{ textAlign: 'center', fontFamily: 'Prompt-Bold', fontWeight: 'bold', color: 'white' }}>สลิปทั้งหมด</Text>
-                        </TouchableHighlight>
+                            <Text style={{ textAlign: 'center', fontFamily: 'Prompt-Light', color: 'white' }}>สลิปทั้งหมด</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View >
