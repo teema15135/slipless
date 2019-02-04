@@ -3,7 +3,7 @@ import {
     Platform, StyleSheet, Text, View, Image, ImageBackground,
     TouchableWithoutFeedback, Button, FlatList, TouchableHighlight
 } from 'react-native';
-import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { Server } from './config/server';
 import { slipData } from '../data/historyData';
@@ -21,7 +21,8 @@ class SlipFlatListItem extends Component {
                     flexDirection: 'column',
                     justifyContent: 'flex-start',
                     width: 200,
-                    elevation: 10,
+                    elevation: 5,
+                    backgroundColor: 'white',
                     margin: 4,
                     overflow: 'hidden',
                 }}>
@@ -97,13 +98,13 @@ export default class ESlipPage extends Component {
     }
 
     changeColor = () => {
-        if (this.state.bookmarkColor == 'pink')
+        if (this.state.bookmarkColor == 'white')
             this.setState({
-                bookmarkColor: 'white'
+                bookmarkColor: 'springgreen'
             });
         else
             this.setState({
-                bookmarkColor: 'pink'
+                bookmarkColor: 'white'
             });
     }
 
@@ -144,7 +145,7 @@ export default class ESlipPage extends Component {
                                             setTimeout(this.changeColor, 300);
                                             this.props.navigation.navigate('Bookmark');
                                         }}>
-                                        <MaterialIcon name={'heart-circle-outline'} size={30} color={this.state.bookmarkColor} />
+                                        <Ionicons name={'ios-star-outline'} size={40} color={this.state.bookmarkColor} />
                                     </TouchableWithoutFeedback>
                                 </View>
                             </View>

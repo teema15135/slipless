@@ -31,7 +31,7 @@ export default class Slip extends React.Component {
         }
         return (
             <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignContent: 'center' }}>
-                <View style={[{ flex: 2 }, Style.centerView]}></View>
+                <View style={[{ flex: 1 }, Style.centerView]}></View>
                 <View style={[{ flex: 7, flexDirection: 'row', justifyContent: 'center', alignContent: 'center' }, Style.centerView]}>
                     <View style={{ width: this.state.width }}>
                         <ScrollView style={{ backgroundColor: 'white', elevation: 2 }}>
@@ -39,7 +39,7 @@ export default class Slip extends React.Component {
                         </ScrollView>
                     </View>
                 </View>
-                <View style={{ flex: 2 }}>
+                <View style={{ flex: 1 }}>
                 </View>
                 <View style={{ flex: 1 }}></View>
             </View>
