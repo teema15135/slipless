@@ -22,7 +22,8 @@ class SlipFlatListItem extends Component {
                     flexDirection: 'column',
                     justifyContent: 'flex-start',
                     width: 200,
-                    elevation: 10,
+                    elevation: 5,
+                    backgroundColor: 'white',
                     margin: 4,
                     overflow: 'hidden',
                 }}>
@@ -98,13 +99,13 @@ export default class ESlipPage extends Component {
     }
 
     changeColor = () => {
-        if (this.state.bookmarkColor == 'pink')
+        if (this.state.bookmarkColor == 'white')
             this.setState({
-                bookmarkColor: 'white'
+                bookmarkColor: 'springgreen'
             });
         else
             this.setState({
-                bookmarkColor: 'pink'
+                bookmarkColor: 'white'
             });
     }
 
