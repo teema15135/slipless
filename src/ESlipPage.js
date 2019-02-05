@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
     Platform, StyleSheet, Text, View, Image, ImageBackground,
-    TouchableWithoutFeedback, Button, FlatList, TouchableHighlight,TouchableOpacity
+    Button, FlatList, TouchableHighlight, TouchableOpacity,
+    ProgressBarAndroid
 } from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon from "react-native-vector-icons/Ionicons";
@@ -14,6 +15,7 @@ import { ScrollableTab } from 'native-base';
 var mainStyle = require('../styles/mainStyle');
 
 class SlipFlatListItem extends Component {
+
     render() {
         return (
             <View
@@ -22,7 +24,6 @@ class SlipFlatListItem extends Component {
                     flexDirection: 'column',
                     justifyContent: 'flex-start',
                     width: 200,
-                    elevation: 5,
                     backgroundColor: 'white',
                     margin: 4,
                     overflow: 'hidden',
@@ -33,25 +34,32 @@ class SlipFlatListItem extends Component {
                     color: 'grey',
                     margin: 20
                 }}>{this.props.item.slip}</Text> */}
-                <TouchableWithoutFeedback
-                            onPress={() => {
-                                this.props.parentFlatList.props.navigation.navigate('Slip', {
-                                    sid: this.props.item.key,
-                                });
-                            }}
-                            style={{
-                                flexDirection: 'column',
-                                backgroundColor: 'green',
-                                width: 150,
-                                height: 30,
-                                justifyContent: 'center',
-                                alignContent: 'center',
-                                elevation: 3,
-                                borderRadius: 15
-                            }}
-                        >
-                    <Image source={{ uri: this.props.item.uri }} style={{ width: 200, height: "100%" }} />
-                </TouchableWithoutFeedback>
+                {/* 
+                    Image.getSize(this.state.uri, (width, height) => {
+                    var screenWidth = Dimensions.get('window').width * 0.75
+                    var scaleFactor = width / screenWidth
+                    var imageHeight = height / scaleFactor
+                    this.setState({ width: screenWidth, height: imageHeight, isLoading: false })
+                    });
+                */}
+                <TouchableOpacity
+                    onPress={() => {
+                        this.props.parentFlatList.props.navigation.navigate('Slip', {
+                            sid: this.props.item.key,
+                        });
+                    }}
+                    style={{
+                        flexDirection: 'column',
+                        backgroundColor: 'green',
+                        width: 300,
+                        height: 330,
+                        justifyContent: 'center',
+                        alignContent: 'center',
+                        elevation: 3,
+                    }}
+                >
+                    <Image source={{ uri: this.props.item.uri }} style={{ width: 200, height: '100%' }} />
+                </TouchableOpacity>
             </View>
         );
     }
@@ -63,7 +71,6 @@ export default class ESlipPage extends Component {
         super(props);
         this.state = {
             isLoading: true,
-            bookmarkColor: 'white',
             slips: []
         }
     }
@@ -92,21 +99,9 @@ export default class ESlipPage extends Component {
             }
             comp.setState({
                 isLoading: false,
-                bookmarkColor: 'white',
                 slips: slips
             });
         }
-    }
-
-    changeColor = () => {
-        if (this.state.bookmarkColor == 'white')
-            this.setState({
-                bookmarkColor: 'springgreen'
-            });
-        else
-            this.setState({
-                bookmarkColor: 'white'
-            });
     }
 
     static navigationOptions = {
@@ -120,8 +115,11 @@ export default class ESlipPage extends Component {
     render() {
         if (this.state.isLoading) {
             return (
-                <View>
-                    <Text>Now Loading</Text>
+                <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <ProgressBarAndroid
+                        styleAttr='Large'
+                        indeterminate={true}
+                        />
                 </View>
             )
         }
@@ -140,13 +138,14 @@ export default class ESlipPage extends Component {
                             </View>
                             <View style={{ flex: 4, flexDirection: 'row', justifyContent: 'flex-end', top: -20 }}>
                                 <View style={{ width: 40, flexDirection: 'column', justifyContent: 'center' }}>
-                                    <TouchableOpacity style={{ width: 50, height: 50,elevation: 2 }}
+                                    <TouchableOpacity style={{ width: 50, height: 50, elevation: 2 }}
+                                        activeOpacity={0.1}
                                         onPress={() => {
-                                            this.changeColor();
-                                            setTimeout(this.changeColor, 300);
+                                            // this.changeColor();
+                                            // setTimeout(this.changeColor, 300);
                                             this.props.navigation.navigate('Bookmark');
                                         }}>
-                                        <Icon name={'ios-star'} size={30} color='white' />
+                                        <Icon name={'ios-star'} size={30} color={'white'} />
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -173,7 +172,7 @@ export default class ESlipPage extends Component {
                         marginBottom: 40,
                         flexDirection: 'row',
                         justifyContent: 'center',
-                        }}>
+                    }}>
                         <TouchableOpacity
                             onPress={() => {
                                 // go to all slip page

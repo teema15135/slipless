@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, TouchableHighlight, StyleSheet, Text, View, ImageBackground, Image, TouchableWithoutFeedback } from 'react-native';
+import { Button, TouchableHighlight, StyleSheet, Text, View, ImageBackground, Image, TouchableWithoutFeedback, ProgressBarAndroid } from 'react-native';
 import Barcode from 'react-native-barcode-builder';
 import IconComponent from 'react-native-vector-icons/Ionicons'
 import firebase from './config/firebase';
@@ -50,14 +50,17 @@ class UserBarcode extends Component {
                     </View>
                     <View style={{ flex: 3, flexDirection: 'column' }}>
                         <TouchableWithoutFeedback onPress={this.getBarcode}>
-                            <Image source={require('../img/coin.png')} style={{ width: 25, height: 25, alignSelf: 'center' }} />
+                            <ProgressBarAndroid
+                                styleAttr='Large'
+                                indeterminate={true}
+                            />
                         </TouchableWithoutFeedback>
                     </View>
                 </View>
             );
         }
         return (
-            <View style={{ flex: 1, flexDirection: 'column' , justifyContent: 'center',}}>
+            <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', }}>
                 <Barcode value={this.state.valueOfBarcode} format="CODE128" />
                 <Text style={styles.valueBarcode}>{this.state.valueOfBarcode}</Text>
             </View>

@@ -52,20 +52,24 @@ const TabNavigator = createBottomTabNavigator({
           )
         } else if (routeName === 'Slip') {
           iconName = 'md-paper';
-          size = 25;
-          return <IconComponent name={iconName} size={size} color={tintColor} />;
+          size = (focused ? 25 : 30);
+          padTop = (focused ? 0 : 10);
+          return <IconComponent name={iconName} size={size} color={tintColor} style={{ paddingTop: padTop }} />;
         } else if (routeName === 'Point') {
           iconName = 'trophy';
-          size = 25;
-          return <SimpleLineIconCompoment name={iconName} size={size} color={tintColor} />
+          size = (focused ? 25 : 30);
+          padTop = (focused ? 0 : 10);
+          return <SimpleLineIconCompoment name={iconName} size={size} color={tintColor} style={{ paddingTop: padTop }} />
         } else if (routeName === 'Payment') {
           iconName = 'md-cash';
-          size = 25;
-          return <IconComponent name={iconName} size={size} color={tintColor} />;
+          size = (focused ? 25 : 30);
+          padTop = (focused ? 0 : 10);
+          return <IconComponent name={iconName} size={size} color={tintColor} style={{ paddingTop: padTop }} />;
         } else if (routeName === 'Reward') {
           iconName = 'present';
-          size = 25;
-          return <SimpleLineIconCompoment name={iconName} size={size} color={tintColor} />
+          size = (focused ? 25 : 30);
+          padTop = (focused ? 0 : 10);
+          return <SimpleLineIconCompoment name={iconName} size={size} color={tintColor} style={{ paddingTop: padTop }} />
         }
 
         return <IconComponent name={iconName} size={size} color={tintColor} />;
@@ -76,13 +80,13 @@ const TabNavigator = createBottomTabNavigator({
         if (routeName === 'Home') {
           labelName = '';
         } else if (routeName === 'Slip') {
-          labelName = 'ใบเสร็จ';
+          labelName = (focused ? 'ใบเสร็จ' : '');
         } else if (routeName === 'Point') {
-          labelName = 'คะแนน';
+          labelName = (focused ? 'คะแนน' : '');
         } else if (routeName === 'Payment') {
-          labelName = 'การใช้จ่าย';
+          labelName = (focused ? 'การใช้จ่าย' : '');
         } else if (routeName === 'Reward') {
-          labelName = 'สิทธิพิเศษ';
+          labelName = (focused ? 'สิทธิพิเศษ' : '');
         }
 
         return <Text style={style.labelText}>{labelName}</Text>

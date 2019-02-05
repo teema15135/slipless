@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Image, ImageBackground, FlatList } from 'react-native';
+import { Platform, StyleSheet, Text, View, Image, ImageBackground, FlatList, ProgressBarAndroid } from 'react-native';
 import { Server } from './config/server';
 
 var mainStyle = require('../styles/mainStyle');
@@ -48,8 +48,11 @@ export default class PointPage extends Component {
     render() {
         if (this.state.isLoading) {
             return (
-                <View>
-                    <Text>Now Loading</Text>
+                <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <ProgressBarAndroid
+                        styleAttr='Large'
+                        indeterminate={true}
+                        />
                 </View>
             )
         }

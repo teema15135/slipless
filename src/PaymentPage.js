@@ -39,21 +39,14 @@ export default class PaymentPage extends Component {
             <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
                 <View style={{ flex: 2 }}>
                     <ImageBackground source={require('../img/glass-green-water-blur.png')} style={mainStyle.imageBG}>
-                        <View style={{ flexDirection: 'column' }}>
+                        <View style={{ flex: 1, flexDirection: 'column' }}>
                             <View style={{ flex: 1, flexDirection: 'row', marginTop: 10 }}>
-                                <View style={{ flex: 1 }}>
-                                    {/* <Image style={{ top: 5, left: 5, width: 20, height: 20, marginLeft: 15 }} source={require('../img/left_arrow.png')} /> */}
-                                </View>
                                 <View style={{ flex: 3 }}>
-                                    <Text style={{ fontFamily: 'Poppins-Light', fontSize: 20, color: 'white', alignSelf: 'center' }}>Point</Text>
-                                </View>
-                                <View style={{ flex: 1 }}>
-
+                                    <Text style={{ fontFamily: 'Poppins-Light', fontSize: 20, color: 'white', alignSelf: 'center' }}>Payment</Text>
                                 </View>
                             </View>
-                            <View style={{ marginTop: 30 }}>
-                                <Text style={{ fontFamily: 'Poppins-Light', fontSize: 100, color: 'white', alignSelf: 'center' }}>{point}</Text>
-                                <Text style={{ fontFamily: 'Poppins-Light', fontSize: 10, color: 'white', alignSelf: 'center' }}>total</Text>
+                            <View style={{ flex: 5, marginTop: 30, backgroundColor: '#AAAAAA', flexDirection: 'column-reverse', justifyContent: 'flex-start', }}>
+                                <View style={{ height: 150, backgroundColor: '#CCAA00' }}></View>
                             </View>
                         </View>
                     </ImageBackground>
