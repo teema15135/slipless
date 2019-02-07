@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "347721073324",
+    "firebase_url": "https://sliplessdemo.firebaseio.com",
+    "project_id": "sliplessdemo",
+    "storage_bucket": "sliplessdemo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:347721073324:android:a1b7183e2a69a0a3",
+        "android_client_info": {
+          "package_name": "com.slipless"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "347721073324-jhmvvglb5motd9bqg6q7t0ov2448udbl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1wZiZ9o2o7L56tvqK7hyKkyIET63Lwk0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
