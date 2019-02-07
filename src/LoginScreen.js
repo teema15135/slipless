@@ -34,19 +34,16 @@ export default class App extends Component {
 
       const credential = await RNFirebase.auth.FacebookAuthProvider.credential(data.accessToken);
 
-      Alert.alert('test');
       const currentUser = await RNFirebase.auth().signInWithCredential(credential);
 
       RNFirebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-          Alert.alert('Login successfull');
           comp.props.navigation.navigate('Main');
         } else {
           Alert.alert('Login failed');
         }
       })
     } catch (e) {
-      Alert.alert('Catch!!');
     }
 
     /*

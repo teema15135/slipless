@@ -90,14 +90,15 @@ const TabNavigator = createBottomTabNavigator({
         }
 
         return <Text style={style.labelText}>{labelName}</Text>
-      }
+      },
     }),
     tabBarOptions: {
       activeTintColor: 'green',
       inactiveTintColor: 'gray',
+      borderWidth: 0,
     },
     initialRouteName: 'Home',
-  }
+  },
 );
 
 const ContainerDrawer = createAppContainer(TabNavigator);
