@@ -2,7 +2,8 @@ import React from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 import ESlipScreen from './ESlipPage';
-import BookmarkScreen from './BookmarkIndex';
+import BookmarkScreen from './BookmarkPage';
+import HistoryScreen from './HistoryPage';
 import SlipScreen from './Slip';
 
 import { fromLeft } from 'react-navigation-transitions';
@@ -28,9 +29,10 @@ const Stack = createStackNavigator(
         Slip: {
             screen: SlipScreen,
             path: '/:sid',
-            // navigationOptions: ({ navigation }) => ({
-            //     title: `${navigation.state.params.sid}'s Page`,
-            // }),
+        },
+        History: {
+            screen: HistoryScreen,
+            path: '/:sid'
         }
     },
     {

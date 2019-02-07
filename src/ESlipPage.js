@@ -6,7 +6,6 @@ import {
 } from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon from "react-native-vector-icons/Ionicons";
-
 import { Server } from './config/server';
 // import { slipData } from '../data/historyData';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -175,7 +174,7 @@ export default class ESlipPage extends Component {
                     }}>
                         <TouchableOpacity
                             onPress={() => {
-                                // go to all slip page
+                                this.props.navigation.navigate('History');
                             }}
                             style={{
                                 flexDirection: 'column',
