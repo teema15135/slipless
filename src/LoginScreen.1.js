@@ -3,67 +3,31 @@ import {
   StyleSheet,
   View,
   Image,
-  TouchableOpacity,
-  Alert
+  TouchableOpacity
 } from "react-native";
 import { fbLoginPermissions } from "./constants/index";
-///import firebase from "./config/firebase";
+import firebase from "./config/firebase";
 import auth from "./config/auth";
 import RNFirebase from "react-native-firebase";
 //import CombinedButton from "react-native-combined-button";
 
 // import { handleFbLogin } from './lib/auth';
 
-import { AccessToken, LoginManager } from 'react-native-fbsdk';
-
 export default class App extends Component {
 
-  handleFbLogin = async () => {
-    try {
-      const result = await LoginManager.logInWithReadPermissions(['email']);
-      const comp = this;
-      if (result.isCancelled) {
-        throw new Error('User cancelled request');
-      }
-
-      const data = await AccessToken.getCurrentAccessToken();
-
-      if (!data) {
-        throw new Error('Something went wrong obtaining the users access token');
-      }
-
-      const credential = await RNFirebase.auth.FacebookAuthProvider.credential(data.accessToken);
-
-      Alert.alert('test');
-      const currentUser = await RNFirebase.auth().signInWithCredential(credential);
-
-      RNFirebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-          Alert.alert('Login successfull');
-          comp.props.navigation.navigate('Main');
-        } else {
-          Alert.alert('Login failed');
-        }
-      })
-    } catch (e) {
-      Alert.alert('Catch!!');
-    }
-
-    /*
+  handleFbLogin = () =>
     //firebase.auth().createUserWithEmailAndPassword("test@mail.com", "123456")
     auth.Facebook.login(fbLoginPermissions)
       .then(token => {
         var dis = this;
-        
         firebase
           .auth()
           .signInWithCredential(
             RNFirebase.auth.FacebookAuthProvider.credential(token)
           );
-          Alert.alert("USE HANDLEFBLOGIN");
         console.log("ได้แล้ว");
 
-        firebase.auth().onAuthStateChanged(function (user) {
+        firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
             dis.props.navigation.navigate("Main");
           } else {
@@ -75,14 +39,12 @@ export default class App extends Component {
         console.log(fireBaseUser);
       })
       .catch(err => this.onError && this.onError(err));
-      */
-  }
 
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.backgroundImage}>
-          <Image source={require("../img/loginBg.png")} style={{ flex: 1, resizeMode: 'cover', width: "100%", height: "100%" }}>
+          <Image source={require("../img/loginBg.png")} style={{flex:1, resizeMode:'cover', width: "100%", height: "100%"}}>
             {this.props.children}
           </Image>
         </View>
@@ -98,7 +60,7 @@ export default class App extends Component {
             <Image
               source={require("../img/fb.png")}
               style={styles.FacebookStyle}
-            //style={styles.ImageIconStyle}
+              //style={styles.ImageIconStyle}
             />
             {/* <View style={styles.SeparatorLine} />
             <Text style={styles.TextStyle}> Sign in with facebook </Text> */}

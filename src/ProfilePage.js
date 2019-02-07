@@ -35,7 +35,7 @@ export default class App extends Component {
                     <ImageBackground source={require('../img/profile-bg.jpg')} style={{flex: 1, width: '100%', flexDirection: 'column',justifyContent: 'center'}}>
                         <View>
                             <Image source={{ uri: this.state.profileURI }} style={{height: 45, width: 45, borderRadius: 40}} />
-                            <Text style={{fontSize: 15}}>displayName</Text>
+                            <Text style={{fontSize: 15}}>{this.state.displayName}</Text>
                         </View>
                     </ImageBackground>
                 </View>
