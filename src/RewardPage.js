@@ -44,7 +44,7 @@ class RewardList extends Component {
                     borderRadius: 10,
                     margin: 4,
                 }}>
-                <View style={{flexDirection: 'row', width: 300, justifyContent:'space-between', marginTop:5}}>
+                <View style={{ flexDirection: 'row', width: 300, justifyContent: 'space-between', marginTop: 5 }}>
                     <View></View>
                     <View>
                         <Text style={{
@@ -55,8 +55,31 @@ class RewardList extends Component {
                         }}>{/*this.props.item.key*/this.props.item.coupon_name}</Text>
                     </View>
                     <View>
-                    <TouchableOpacity onPress={MyList._showAlert}>
-                    <Icon
+                        <TouchableOpacity onPress={() => {
+                            Alert.alert(
+                                'ยืนยันการลบคูปอง',
+                                'การลบคูปองจะไม่สามารถย้อนกลับได้',
+                                [
+                                    {
+                                        text: 'ยืนยัน', onPress: () => {
+                                            var request = new XMLHttpRequest();
+                                            request.open('DELETE', Server.path + '/coupon?uid=' + 'jifUBEXSfGVpkLHKyOHZDsVGS042' + '&bar=' + this.props.item.coupon_barcode);
+                                            request.responseType = 'json';
+                                            request.send();
+                                            request.onload = () => {
+                                                this.props.callback();
+                                                Alert.alert('ลบคูปองสำเร็จ');
+                                                this.props.toggleModal();
+                                            }
+                                        }
+                                    },
+                                    {
+                                        text: 'ยกเลิก', onPress: () => {}
+                                    }
+                                ]
+                            )
+                        }}>
+                            <Icon
                                 name="ios-trash"
                                 color="#21a775"
                                 size={30}
@@ -108,30 +131,30 @@ export default class MyList extends React.PureComponent {
                 },
                 {
                     text: 'Cancel',
-                    style:'cancel',
+                    style: 'cancel',
                 }
             ],
-            {cancelable:false},
+            { cancelable: false },
         );
     }
 
     _loadAllCoupon = () => {
         var request = new XMLHttpRequest();
         var comp = this;
-        request.open('GET', Server.path + '/coupon?uid=jifUBEXSfGVpkLHKyOHZDsVGS042');
+        request.open('GET', Server.path + '/coupon?uid=' + 'jifUBEXSfGVpkLHKyOHZDsVGS042');
         request.responseType = 'json';
         request.send();
-        request.onload = function() {
+        request.onload = function () {
             var coupons = request.response.coupon;
             var arr_len = coupons.length;
             var nameOfStores = [];
-            for(var i = 0; i < arr_len; i++) {
-                if(nameOfStores.indexOf(coupons[i].coupon_store) === -1) {
+            for (var i = 0; i < arr_len; i++) {
+                if (nameOfStores.indexOf(coupons[i].coupon_store) === -1) {
                     nameOfStores.push(coupons[i].coupon_store);
                 }
             }
             var listOfStore = [];
-            for(var i = 0; i < nameOfStores.length; i++) {
+            for (var i = 0; i < nameOfStores.length; i++) {
                 var curKey = i.toString();
                 listOfStore.push({
                     key: curKey,
@@ -151,7 +174,7 @@ export default class MyList extends React.PureComponent {
         var allCoupons = this.state.allCoupons;
         var allLen = allCoupons.length;
 
-        for(var i = 0; i < allLen; i++) {
+        for (var i = 0; i < allLen; i++) {
             if (allCoupons[i].coupon_store == storeName) {
                 currentStoreCoupons.push(allCoupons[i]);
             }
@@ -170,7 +193,7 @@ export default class MyList extends React.PureComponent {
                     <ProgressBarAndroid
                         styleAttr='Large'
                         indeterminate={true}
-                        />
+                    />
                 </View>
             )
         }
@@ -236,7 +259,7 @@ export default class MyList extends React.PureComponent {
                                     ]*/this.state.currentStoreCoupons}
                                     renderItem={({ item, index }) => {
                                         return (
-                                            <RewardList item={item} index={index} parenFlatList={this}></RewardList>
+                                            <RewardList item={item} index={index} parenFlatList={this} callback={this._loadAllCoupon.bind(this)} toggleModal={this._toggleModal.bind(this)}></RewardList>
                                         );
                                     }}>
                                 </FlatList>
