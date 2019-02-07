@@ -116,6 +116,9 @@
 		<string>Prompt-SemiBoldItalic.ttf</string>
 		<string>Prompt-Thin.ttf</string>
 		<string>Prompt-ThinItalic.ttf</string>
+		<string>aqua.ttf</string>
+		<string>Fredoka dingbats.ttf</string>
+		<string>FredokaOne-Regular.ttf</string>
 	</array>
 </dict>
 </plist>

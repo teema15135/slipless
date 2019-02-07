@@ -4,9 +4,10 @@ import {
     FlatList, Alert, TouchableOpacity, StatusBar, ProgressBarAndroid
 } from 'react-native';
 import Modal from "react-native-modal";
-import Icon from "react-native-vector-icons/Ionicons";
+// import Icon from "react-native-vector-icons/Ionicons";
 import { Item } from 'native-base';
 import { Server } from './config/server';
+import { ListItem, Icon } from 'react-native-elements'
 
 var mainStyle = require('../styles/mainStyle');
 
@@ -74,13 +75,14 @@ class RewardList extends Component {
                                         }
                                     },
                                     {
-                                        text: 'ยกเลิก', onPress: () => {}
+                                        text: 'ยกเลิก', onPress: () => { }
                                     }
                                 ]
                             )
                         }}>
                             <Icon
-                                name="ios-trash"
+                                name="trash"
+                                type='evilicon'
                                 color="#21a775"
                                 size={30}
                             />
@@ -186,6 +188,29 @@ export default class MyList extends React.PureComponent {
         this._toggleModal();
     }
 
+
+    renderItem = ({ item }) => (
+        <TouchableOpacity onPress={() => this._loadStoreCoupon(item.name)}>
+            <ListItem
+                title={
+                    <Text style={{ fontFamily: 'Prompt-Medium' }}>{item.store_name}</Text>
+                }
+                subtitle={
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text style={{ fontFamily: 'Prompt-Light', fontSize: 12 }}>{item.name}</Text>
+                        <Icon
+                            name='chevron-right'
+                            type='entypo'
+                            color='#E5E7E9'
+                        />
+                    </View>
+                }
+                leftAvatar={{ source: { uri: 'https://firebasestorage.googleapis.com/v0/b/sliplessdemo.appspot.com/o/avatar-coupon.png?alt=media&token=c865bc45-53bf-4f43-9b5e-0b7cbf1655f0' } }}
+            />
+        </TouchableOpacity>
+
+    )
+
     render() {
         if (this.state.isLoading) {
             return (
@@ -198,31 +223,31 @@ export default class MyList extends React.PureComponent {
             )
         }
         return (
-            <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
+            <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'flex-start' }}>
                 <StatusBar
                     barStyle="light-content"
                     backgroundColor="#E0E0E0"
                 />
                 <View style={{ flex: 1 }}>
-                    <ImageBackground source={require('../img/glass-green-water-blur.png')} style={mainStyle.imageBG}>
+                    <View style={{
+                        flex: 1,
+                        width: '100%',
+                        flexDirection: 'column',
+                        justifyContent: 'flex-start',
+                        backgroundColor: '#87bcbf'
+                    }}>
                         <View style={{ flexDirection: 'column' }}>
                             <View style={{ flexDirection: 'column', justifyContent: 'flex-start', marginBottom: 150 }}>
-                                <Text style={{ fontFamily: 'Prompt-Light', fontSize: 25, color: 'white', alignSelf: 'center' }}>สิทธิพิเศษ</Text>
+                                <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 25, color: 'white', alignSelf: 'center', marginTop: 50 }}>Coupon</Text>
                             </View>
                         </View>
-                    </ImageBackground>
+                    </View>
                 </View>
-                <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start', backgroundColor: 'white' }}>
+                <View style={{ flex: 3, flexDirection: 'column', justifyContent: 'flex-start', backgroundColor: 'white' }}>
                     <FlatList
-                        data={/*list*/this.state.storeList}
+                        data={this.state.storeList}
                         ItemSeparatorComponent={this.space}
-                        renderItem={({ item }) => (
-                            <TouchableOpacity onPress={() => this._loadStoreCoupon(item.name)}>
-                                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={style.listText}>{item.name}</Text>
-                                </View>
-                            </TouchableOpacity>
-                        )}
+                        renderItem={this.renderItem}
                     />
 
                     <Modal
@@ -234,7 +259,8 @@ export default class MyList extends React.PureComponent {
                             <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
                                 <TouchableOpacity onPress={this._toggleModal}>
                                     <Icon
-                                        name="ios-close-circle"
+                                        name="closecircle"
+                                        type='antdesign'
                                         color="#ffffff"
                                         size={30}
                                     />
@@ -245,18 +271,7 @@ export default class MyList extends React.PureComponent {
                                     // style={{ marginTop: 30, width: '100%'}}
                                     showsVerticalScrollIndicator={false}
                                     showsHorizontalScrollIndicator={false}
-                                    data={/*[
-                                        { key: 'สิทธิ์ 1' },
-                                        { key: 'สิทธิ์ 2' },
-                                        { key: 'สิทธิ์ 3' },
-                                        { key: 'สิทธิ์ 4' },
-                                        { key: 'สิทธิ์ 5' },
-                                        { key: 'สิทธิ์ 6' },
-                                        { key: 'สิทธิ์ 7' },
-                                        { key: 'สิทธิ์ 8' },
-                                        { key: 'สิทธิ์ 9' },
-                                        { key: 'สิทธิ์ 10' }
-                                    ]*/this.state.currentStoreCoupons}
+                                    data={this.state.currentStoreCoupons}
                                     renderItem={({ item, index }) => {
                                         return (
                                             <RewardList item={item} index={index} parenFlatList={this} callback={this._loadAllCoupon.bind(this)} toggleModal={this._toggleModal.bind(this)}></RewardList>

@@ -3,6 +3,9 @@ import { DrawerItems, createAppContainer, createBottomTabNavigator } from 'react
 import { Text, StyleSheet, Image, SafeAreaView, ScrollView, View, ImageBackground } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons';
+import MatMaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { ListItem, Icon } from 'react-native-elements'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import HomeScreen from './HomeIndex';
 import PointScreen from './PointIndex';
@@ -31,6 +34,8 @@ const TabNavigator = createBottomTabNavigator({
         const { routeName } = navigation.state;
         let IconComponent = Ionicons;
         let SimpleLineIconCompoment = SimpleLineIcon;
+        let MatMaterialComponent = MatMaterialIcons;
+        let Materialcomponent = MaterialIcons;
         let iconName;
         if (routeName === 'Home') {
           iconName = 'ios-qr-scanner';
@@ -52,22 +57,22 @@ const TabNavigator = createBottomTabNavigator({
           )
         } else if (routeName === 'Slip') {
           iconName = 'md-paper';
-          size = (focused ? 25 : 30);
+          size = (focused ? 25 : 25);
           padTop = (focused ? 0 : 10);
           return <IconComponent name={iconName} size={size} color={tintColor} style={{ paddingTop: padTop }} />;
         } else if (routeName === 'Point') {
           iconName = 'trophy';
-          size = (focused ? 25 : 30);
+          size = (focused ? 25 : 20);
           padTop = (focused ? 0 : 10);
           return <SimpleLineIconCompoment name={iconName} size={size} color={tintColor} style={{ paddingTop: padTop }} />
         } else if (routeName === 'Payment') {
-          iconName = 'md-cash';
-          size = (focused ? 25 : 30);
+          iconName = 'attach-money';
+          size = (focused ? 25 : 24);
           padTop = (focused ? 0 : 10);
-          return <IconComponent name={iconName} size={size} color={tintColor} style={{ paddingTop: padTop }} />;
+          return <Materialcomponent name={iconName} size={size} color={tintColor} style={{ paddingTop: padTop }} />;
         } else if (routeName === 'Reward') {
           iconName = 'present';
-          size = (focused ? 25 : 30);
+          size = (focused ? 25 : 22);
           padTop = (focused ? 0 : 10);
           return <SimpleLineIconCompoment name={iconName} size={size} color={tintColor} style={{ paddingTop: padTop }} />
         }
@@ -86,16 +91,15 @@ const TabNavigator = createBottomTabNavigator({
         } else if (routeName === 'Payment') {
           labelName = (focused ? 'การใช้จ่าย' : '');
         } else if (routeName === 'Reward') {
-          labelName = (focused ? 'สิทธิพิเศษ' : '');
+          labelName = (focused ? 'คูปอง' : '');
         }
 
         return <Text style={style.labelText}>{labelName}</Text>
       },
     }),
     tabBarOptions: {
-      activeTintColor: 'green',
-      inactiveTintColor: 'gray',
-      borderWidth: 0,
+      activeTintColor: '#ececec',
+      inactiveTintColor: 'grey',
     },
     initialRouteName: 'Home',
   },

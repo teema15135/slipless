@@ -5,7 +5,8 @@ import {
     ProgressBarAndroid
 } from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Icon from "react-native-vector-icons/Ionicons";
+// import Icon from "react-native-vector-icons/Ionicons";
+import { ListItem, Icon } from 'react-native-elements'
 import { Server } from './config/server';
 // import { slipData } from '../data/historyData';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -125,31 +126,39 @@ export default class ESlipPage extends Component {
         return (
             <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
                 <View style={{ flex: 1 }}>
-                    <ImageBackground source={require('../img/glass-green-water-blur.png')} style={{
+                    {/* <ImageBackground source={require('../img/glass-green-water-blur.png')} style={{
                         flex: 1,
                         width: '100%',
                         flexDirection: 'column',
                         justifyContent: 'flex-start',
-                    }}>
+                    }}> */}
+                    <View style={{
+                        flex: 1,
+                        width: '100%',
+                        flexDirection: 'column',
+                        justifyContent: 'flex-start',
+                        backgroundColor:'#344856'}}>
+                    
                         <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
                             <View style={{ flex: 1 }}>
-                                <Text style={{ fontFamily: 'Prompt-Light', fontSize: 30, color: 'white', alignSelf: 'center', marginTop: 40 }}>e-slip</Text>
+                                <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 30, color: 'white', alignSelf: 'center', marginTop: 40 }}>e-slip</Text>
                             </View>
                             <View style={{ flex: 4, flexDirection: 'row', justifyContent: 'flex-end', top: -20 }}>
-                                <View style={{ width: 40, flexDirection: 'column', justifyContent: 'center' }}>
-                                    <TouchableOpacity style={{ width: 50, height: 50, elevation: 2 }}
+                                <View style={{ width: 40, flexDirection: 'column', justifyContent: 'center', marginRight:10}}>
+                                    <TouchableOpacity style={{ width: 50, height: 50, elevation: 5 }}
                                         activeOpacity={0.1}
                                         onPress={() => {
                                             // this.changeColor();
                                             // setTimeout(this.changeColor, 300);
                                             this.props.navigation.navigate('Bookmark');
                                         }}>
-                                        <Icon name={'ios-star'} size={30} color={'white'} />
+                                        <Icon name={'star'} type={'materialicon'} size={30} color={'#D97D54'} />
                                     </TouchableOpacity>
                                 </View>
                             </View>
                         </View>
-                    </ImageBackground>
+                        </View>
+                    {/* </ImageBackground> */}
                 </View>
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-end', backgroundColor: '#ECECEC' }}>
                     <View style={{ position: 'absolute', top: -120, height: 330 }}>
@@ -178,7 +187,8 @@ export default class ESlipPage extends Component {
                             }}
                             style={{
                                 flexDirection: 'column',
-                                backgroundColor: '#21a775',
+                                // backgroundColor: '#21a775',
+                                backgroundColor:'#D97D54',
                                 width: 140,
                                 height: 25,
                                 justifyContent: 'center',

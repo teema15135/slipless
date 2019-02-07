@@ -1,33 +1,11 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Image, ImageBackground, FlatList, ProgressBarAndroid } from 'react-native';
 import { Server } from './config/server';
+import { ListItem, Icon } from 'react-native-elements'
+
+//87bcbf
 
 var mainStyle = require('../styles/mainStyle');
-
-var point = 10;
-
-const list = [
-    {
-        key: '00',
-        title: '7-Eleven',
-        point: 1
-    },
-    {
-        key: '01',
-        title: 'Tesco Lotus',
-        point: 2
-    },
-    {
-        key: '02',
-        title: 'Tesco Lotus Express',
-        point: 3
-    },
-    {
-        key: '03',
-        title: 'B2S',
-        point: 4
-    },
-];
 
 export default class PaymentPage extends Component {
 
@@ -43,21 +21,21 @@ export default class PaymentPage extends Component {
     }
 
     _loadPayment() {
-        
+
         var nowDate = new Date();
 
         var startWeek = new Date();
         startWeek.setDate(nowDate.getDate() - nowDate.getDay());
         startWeek.setHours(0, 0, 0, 0);
         startWeek = Number(startWeek);
-        
+
         var startMonth = new Date();
         startMonth.setDate(1);
         startMonth.setHours(0, 0, 0, 0);
         startMonth = Number(startMonth);
 
         var comp = this;
-        
+
         var request = new XMLHttpRequest();
         request.open('GET', Server.path + '/allSlip?uid=jifUBEXSfGVpkLHKyOHZDsVGS042');
         request.responseType = 'json';
@@ -70,13 +48,13 @@ export default class PaymentPage extends Component {
             var weekly = 0; //
             var storeList = [];
             var storeKey = 0;
-            for(var i = 0; i < arr_len; i++) {
+            for (var i = 0; i < arr_len; i++) {
                 var curSlip = slips[i];
                 total += curSlip.total_price;
-                if(Number(curSlip.slip_id) >= startWeek) weekly += curSlip.total_price;
-                if(Number(curSlip.slip_id) >= startMonth) monthly += curSlip.total_price;
-                for(var j = 0; j <= storeList.length; j++) {
-                    if(j == storeList.length) {
+                if (Number(curSlip.slip_id) >= startWeek) weekly += curSlip.total_price;
+                if (Number(curSlip.slip_id) >= startMonth) monthly += curSlip.total_price;
+                for (var j = 0; j <= storeList.length; j++) {
+                    if (j == storeList.length) {
                         storeList.push({
                             store_name: curSlip.store_name,
                             store_total: curSlip.total_price,
@@ -85,7 +63,7 @@ export default class PaymentPage extends Component {
                         storeKey++;
                         break;
                     }
-                    if(storeList[j].store_name == curSlip.store_name) {
+                    if (storeList[j].store_name == curSlip.store_name) {
                         storeList[j].store_total += curSlip.total_price;
                         break;
                     }
@@ -109,6 +87,25 @@ export default class PaymentPage extends Component {
         return (<View style={{ height: 1, width: '100%', backgroundColor: '#ececec' }} />)
     }
 
+    renderItem = ({ item }) => (
+        <ListItem
+            title={
+                <Text style={{ fontFamily: 'Prompt-Medium' }}>{item.store_name}</Text>
+            }
+            subtitle={
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <Text style={{ fontFamily: 'Prompt-Light', fontSize: 12 }}>{item.store_total} ฿</Text>
+                    <Icon
+                        name='chevron-left'
+                        type='entypo'
+                        color='#E5E7E9'
+                    />
+                </View>
+            }
+            leftAvatar={{ source: { uri: 'https://firebasestorage.googleapis.com/v0/b/sliplessdemo.appspot.com/o/avatar-bill.png?alt=media&token=8eb49480-dbac-4a92-b2b7-8999364bbd15' } }}
+        />
+    )
+
     render() {
         if (this.state.isLoading) {
             return (
@@ -116,14 +113,20 @@ export default class PaymentPage extends Component {
                     <ProgressBarAndroid
                         styleAttr='Large'
                         indeterminate={true}
-                        />
+                    />
                 </View>
             )
         }
         return (
             <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
-                <View style={{ flex: 2 }}>
-                    <ImageBackground source={require('../img/glass-green-water-blur.png')} style={mainStyle.imageBG}>
+                <View style={{
+                    flex: 2, width: '100%', flexDirection: 'column', justifyContent: 'flex-start',
+                    backgroundColor: '#87bcbf'
+                }}>
+                    <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 30, color: 'white', alignSelf: 'center', marginTop: 40 }}>Payment</Text>
+
+
+                    {/* <ImageBackground source={require('../img/glass-green-water-blur.png')} style={mainStyle.imageBG}>
                         <View style={{ flex: 1, flexDirection: 'column' }}>
                             <View style={{ flex: 1, flexDirection: 'row', marginTop: 10 }}>
                                 <View style={{ flex: 3 }}>
@@ -147,23 +150,32 @@ export default class PaymentPage extends Component {
                                 </View>
                             </View>
                         </View>
-                    </ImageBackground>
+                    </ImageBackground> */}
                 </View>
-                <View style={{ flex: 3, flexDirection: 'column', justifyContent: 'flex-start', backgroundColor: 'white' }}>
-                    <FlatList
-                        data={this.state.storePayment}
-                        ItemSeparatorComponent={this.space}
-                        keyExtractor={(item, index) => item.key}
-                        renderItem={({ item }) =>
-                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                                <Text style={style.listText}>{item.store_name}</Text>
-                                <View style={{ width: 60, flexDirection: 'row', justifyContent: 'flex-end' }}>
-                                    <Text style={style.pointText}>{item.store_total}</Text>
-                                    <Image style={{ width: 17, height: 17, alignSelf: 'center', marginRight: 5 }} source={require('../img/coin.png')} />
-                                </View>
-                            </View>
-                        }
-                    />
+                <View style={{ flex: 3, flexDirection: 'column', justifyContent: 'flex-start', top: -70 }}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', paddingHorizontal: 20 }}>
+                        <View style={{ backgroundColor: '#d97d54', width: 100, height: 130, justifyContent: 'center', alignItems: 'center', borderRadius: 10 }}>
+                            <Text style={{ fontFamily: 'aqua', fontSize: 22 }}>{this.state.weeklyPayment}</Text>
+                            <Text style={{ fontFamily: 'aqua' }}>weekly</Text>
+                        </View>
+                        <View style={{ backgroundColor: '#d97d54', width: 100, height: 130, justifyContent: 'center', alignItems: 'center', borderRadius: 10 }}>
+                            <Text style={{ fontFamily: 'aqua', fontSize: 27 }}>{this.state.totalPayment}</Text>
+                            <Text style={{ fontFamily: 'aqua' }}>total</Text>
+                        </View>
+                        <View style={{ backgroundColor: '#d97d54', width: 100, height: 130, justifyContent: 'center', alignItems: 'center', borderRadius: 10 }}>
+                            <Text style={{ fontFamily: 'aqua', fontSize: 22 }}>{this.state.monthlyPayment}</Text>
+                            <Text style={{ fontFamily: 'aqua' }}>monthly</Text>
+                        </View>
+                    </View>
+                    <View style={{height: 278}}>
+                        <FlatList
+                            data={this.state.storePayment}
+                            ItemSeparatorComponent={this.space}
+                            keyExtractor={(item, index) => item.key}
+                            renderItem={this.renderItem}
+                        />
+                    </View>
+
                 </View>
             </View>
         );

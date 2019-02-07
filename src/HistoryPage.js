@@ -4,6 +4,8 @@ import { ListItem, Icon } from 'react-native-elements'
 import { Server } from './config/server';
 import { format } from 'date-fns'
 
+//d97d54
+
 export default class HistoryPage extends Component {
 
   constructor(props) {
@@ -31,7 +33,7 @@ export default class HistoryPage extends Component {
       var slip_len = loadSlips.length;
 
       for (var i = 0; i < slip_len; i++) {
-       
+
         slips.push({
           key: loadSlips[i].slip_id,
           uri: Server.path + '/image/slip/' + loadSlips[i].slip_id,
@@ -53,12 +55,6 @@ export default class HistoryPage extends Component {
   keyExtractor = (item, index) => item.key
 
   renderItem = ({ item }) => (
-    <TouchableOpacity
-      onPress={() => {
-        this.props.navigation.navigate('Slip', {
-          sid: item.key,
-        });
-      }}>
       <ListItem
         title={
           <Text style={{ fontFamily: 'Prompt-Medium' }}>{item.name}</Text>
@@ -75,12 +71,11 @@ export default class HistoryPage extends Component {
         }
         leftAvatar={{ source: { uri: 'https://firebasestorage.googleapis.com/v0/b/sliplessdemo.appspot.com/o/slip.color.png?alt=media&token=f6270497-13f3-4318-966c-24bc3061168c' } }}
       />
-    </TouchableOpacity>
 
   )
 
   render() {
-    const {goBack} = this.props.navigation;
+    const { goBack } = this.props.navigation;
 
     if (this.state.isLoading) {
       return (
@@ -118,7 +113,7 @@ export default class HistoryPage extends Component {
         </View>
 
         <FlatList
-          style={{height: '92%'}}
+          style={{ height: '92%' }}
           keyExtractor={this.keyExtractor}
           ItemSeparatorComponent={this.space}
           data={this.state.slips}

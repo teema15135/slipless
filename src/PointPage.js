@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Image, ImageBackground, FlatList, ProgressBarAndroid } from 'react-native';
 import { Server } from './config/server';
+import { ListItem, Icon } from 'react-native-elements'
 
 var mainStyle = require('../styles/mainStyle');
 
@@ -25,11 +26,11 @@ export default class PointPage extends Component {
         request.open('GET', Server.path + '/point?uid=jifUBEXSfGVpkLHKyOHZDsVGS042');
         request.responseType = 'json';
         request.send();
-        request.onload = function() {
+        request.onload = function () {
             var points = request.response.points;
             var arr_len = points.length;
             var total = 0;
-            for(var i = 0; i < arr_len; i++) {
+            for (var i = 0; i < arr_len; i++) {
                 points[i].key = i.toString();
                 total += points[i].earned_point;
             }
@@ -45,6 +46,25 @@ export default class PointPage extends Component {
         return (<View style={{ height: 1, width: '100%', backgroundColor: '#ececec' }} />)
     }
 
+    renderItem = ({ item }) => (
+        <ListItem
+            title={
+                <Text style={{ fontFamily: 'FredokaOne-Regular' }}>{item.point_store_name}</Text>
+            }
+            subtitle={
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <Text style={{ fontFamily: 'aqua', fontSize: 12 }}>{item.earned_point} point</Text>
+                    <Icon
+                        name='chevron-left'
+                        type='entypo'
+                        color='#E5E7E9'
+                    />
+                </View>
+            }
+            leftAvatar={{ source: { uri: 'https://firebasestorage.googleapis.com/v0/b/sliplessdemo.appspot.com/o/avatar-coin.png?alt=media&token=8a587768-e9d7-435d-82a9-46098e341d93' } }}
+        />
+    )
+
     render() {
         if (this.state.isLoading) {
             return (
@@ -52,46 +72,41 @@ export default class PointPage extends Component {
                     <ProgressBarAndroid
                         styleAttr='Large'
                         indeterminate={true}
-                        />
+                    />
                 </View>
             )
         }
         return (
             <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
-                <View style={{ flex: 2, backgroundColor: 'white', elevation: 10 }}>
-                    <ImageBackground source={require('../img/glass-green-water-blur.png')} style={mainStyle.imageBG}>
-                        <View style={{ flexDirection: 'column' }}>
-                            <View style={{ flex: 1, flexDirection: 'row', marginTop: 10 }}>
-                                <View style={{ flex: 1 }}>
-                                    {/* <Image style={{ top: 5, left: 5, width: 20, height: 20, marginLeft: 15 }} source={require('../img/left_arrow.png')} /> */}
-                                </View>
-                                <View style={{ flex: 3 }}>
-                                    <Text style={{ fontFamily: 'Poppins-Light', fontSize: 20, color: 'white', alignSelf: 'center' }}>Point</Text>
-                                </View>
-                                <View style={{ flex: 1 }}>
+                <View style={{ flex: 1, backgroundColor: 'white', elevation: 10 }}>
+                    <View style={{
+                        flex: 1,
+                        width: '100%',
+                        flexDirection: 'column',
+                        justifyContent: 'flex-start',
+                        backgroundColor: '#344856'
+                    }}>
+                        {/* <ImageBackground source={require('../img/glass-green-water-blur.png')} style={mainStyle.imageBG}> */}
+                        <View style={{ flexDirection: 'column', alignItems: 'center', marginTop: 40 }}>
 
-                                </View>
+
+                            <Text style={{ fontFamily: 'Poppins-Light', fontSize: 20, color: 'white', alignSelf: 'center' , fontFamily: 'FredokaOne-Regular'}}>Point</Text>
+
+                            <View style={{ width: 150, height: 150, borderRadius: 150 / 2, backgroundColor: '#d97d54', alignItems: 'center', justifyContent:'center', marginTop: 20 }}>
+                                <Text style={{ fontFamily: 'aqua', fontSize: 50, color: 'white', alignSelf: 'center',  }}>{this.state.total_point}</Text>
                             </View>
-                            <View style={{ marginTop: 30 }}>
-                                <Text style={{ fontFamily: 'Poppins-Light', fontSize: 100, color: 'white', alignSelf: 'center' }}>{this.state.total_point}</Text>
-                                <Text style={{ fontFamily: 'Poppins-Light', fontSize: 15, color: 'white', alignSelf: 'center', elevation: 10 }}>total</Text>
-                            </View>
+                            <Text style={{ fontFamily: 'Poppins-Light', fontSize: 15, color: 'white', alignSelf: 'center', elevation: 10 , fontFamily:'aqua', marginTop: 10}}>total</Text>
+
                         </View>
-                    </ImageBackground>
+                        {/* </ImageBackground> */}
+                    </View>
                 </View>
-                <View style={{ flex: 3, flexDirection: 'column', justifyContent: 'flex-start', backgroundColor: 'white' }}>
+                <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start', backgroundColor: 'white' }}>
                     <FlatList
                         data={this.state.points}
                         ItemSeparatorComponent={this.space}
-                        renderItem={({ item }) =>
-                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                                <Text style={style.listText}>{item.point_store_name}</Text>
-                                <View style={{ width: 30, flexDirection: 'row', justifyContent: 'center' }}>
-                                    <Image style={{ width: 17, height: 17, alignSelf: 'center', marginRight: 5 }} source={require('../img/coin.png')} />
-                                    <Text style={style.pointText}>{item.earned_point}</Text>
-                                </View>
-                            </View>
-                        }
+                        renderItem={this.renderItem}
+                        
                     />
                 </View>
             </View>
@@ -104,6 +119,7 @@ const style = StyleSheet.create({
         margin: 10,
         fontSize: 15,
         color: '#202020',
+        alignSelf: 'center'
     },
     separator: {
         flex: 1,
@@ -113,6 +129,6 @@ const style = StyleSheet.create({
     pointText: {
         fontSize: 13,
         alignSelf: 'center',
-        paddingRight: 10
+        paddingRight: 20,
     }
 });

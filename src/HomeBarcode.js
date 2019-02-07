@@ -79,12 +79,15 @@ export default class HomeBarcode extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={styles.containerTop}>
-                    <ImageBackground source={require('../img/glass-green-water-blur.png')} style={styles.imageBG}>
-                        {/* <TouchableHighlight style={styles.menuButtonContainer} onPress={() => this.props.navigation.openDrawer()}>
-                            <Image source={require('../img/menu.png')} style={styles.menuButton} />
-                        </TouchableHighlight> */}
+                    <View style={{
+                        flex: 1,
+                        width: '100%',
+                        flexDirection: 'column',
+                        justifyContent: 'flex-start',
+                        backgroundColor: '#87bcbf'
+                    }}>
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'flex-end', marginRight: 30 }}>
-                            <TouchableHighlight style={{ elevation: 50, flexDirection: 'row', justifyContent: 'center', borderRadius: 25, width: 35, height: 35 }}
+                            <TouchableHighlight style={{ flexDirection: 'row', justifyContent: 'center', borderRadius: 25, width: 35, height: 35 }}
                                 underlayColor={Color.highlightPress}
                                 onPress={() => {
                                     this.props.navigation.navigate('Profile');
@@ -95,7 +98,9 @@ export default class HomeBarcode extends React.Component {
                         <View style={{ flex: 5, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center' }}>
                             <Text style={styles.slipless}>Slipless</Text>
                         </View>
-                    </ImageBackground>
+                    </View>
+                    {/* <ImageBackground source={require('../img/glass-green-water-blur.png')} style={styles.imageBG}>
+                    </ImageBackground> */}
                 </View>
                 <View style={styles.containerBottom}>
                     <UserBarcode></UserBarcode>
@@ -113,7 +118,7 @@ const styles = StyleSheet.create({
     },
     containerTop: {
         flex: 1,
-        elevation: 10,
+        // elevation: 10,
         backgroundColor: 'white',
     },
     containerBottom: {
@@ -131,6 +136,7 @@ const styles = StyleSheet.create({
         elevation: 50,
     },
     valueBarcode: {
+        fontFamily: 'aqua',
         textAlign: 'center',
         color: '#333333',
         marginBottom: 5,
