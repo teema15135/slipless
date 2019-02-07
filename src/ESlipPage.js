@@ -164,7 +164,7 @@ export default class ESlipPage extends Component {
                                 <SlipFlatListItem item={item} index={index} parentFlatList={this}>
                                 </SlipFlatListItem>
                             }
-                            keyExtractor={(item, index) => item.slip}>
+                            keyExtractor={(item, index) => item.key}>
                         </FlatList>
                     </View>
                     <View style={{

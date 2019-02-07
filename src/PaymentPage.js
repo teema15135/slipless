@@ -153,6 +153,7 @@ export default class PaymentPage extends Component {
                     <FlatList
                         data={this.state.storePayment}
                         ItemSeparatorComponent={this.space}
+                        keyExtractor={(item, index) => item.key}
                         renderItem={({ item }) =>
                             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <Text style={style.listText}>{item.store_name}</Text>

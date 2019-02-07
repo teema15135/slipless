@@ -17,43 +17,51 @@ class BookmarkList extends Component {
 
     render() {
         return (
-            <View
-                style={{
-                    marginTop: 20,
-                    flex: 1,
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    alignSelf: 'center',
-                    width: 320,
-                    height: 130,
-                    backgroundColor: 'white',
-                    margin: 4,
-                    marginBottom: 5
-                }}>
-                <View style={{ flexDirection: 'row', width: 300, justifyContent: 'space-between', marginTop: 5 }}>
-                    {/* for center content */}
-                    <View>
-                        <Image
-                            style={{ width: 100, height: 150, position:'absolute' , top:-20}}
-                            // source={require('../img/bookmark2-bg.jpg')}
-                            source={{ uri: this.props.item.uri }}
-                        />
-                    </View>
-                    <View style={{flexDirection: 'row', width: 150}}>
-                        <Text style={{fontFamily: 'Prompt-Medium',fontSize: 16,color: 'grey',margin: 20,marginLeft: 20,}}>
-                            {this.props.item.name}
-                        </Text>
-                    </View>
+            <TouchableOpacity
+                onPress={() => {
+                    this.props.parent.props.navigation.navigate('Slip', {
+                        sid: this.props.item.key,
+                    });
+                }}
+                >
+                <View
+                    style={{
+                        marginTop: 20,
+                        flex: 1,
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                        width: 320,
+                        height: 130,
+                        backgroundColor: 'white',
+                        margin: 4,
+                        marginBottom: 5
+                    }}>
+                    <View style={{ flexDirection: 'row', width: 300, justifyContent: 'space-between', marginTop: 5 }}>
+                        {/* for center content */}
+                        <View>
+                            <Image
+                                style={{ width: 100, height: 150, position: 'absolute', top: -20 }}
+                                // source={require('../img/bookmark2-bg.jpg')}
+                                source={{ uri: this.props.item.uri }}
+                            />
+                        </View>
+                        <View style={{ flexDirection: 'row', width: 150 }}>
+                            <Text style={{ fontFamily: 'Prompt-Medium', fontSize: 16, color: 'grey', margin: 20, marginLeft: 20, }}>
+                                {this.props.item.name}
+                            </Text>
+                        </View>
 
+                    </View>
                 </View>
-            </View>
+            </TouchableOpacity>
         );
     }
 }
 
 
 
-export default class App extends Component {
+export default class BookmarkScreen extends Component {
 
     constructor(props) {
         super(props);
@@ -114,6 +122,7 @@ export default class App extends Component {
                             // style={{ position: 'absolute' }}
                             showsVerticalScrollIndicator={false}
                             showsHorizontalScrollIndicator={false}
+                            keyExtractor={(item, index) => item.key}
                             data={/*[
                                 { key: 'Bookmark 1' },
                                 { key: 'Bookmark 2' },
@@ -128,7 +137,7 @@ export default class App extends Component {
                             ]*/this.state.bookmarks}
                             renderItem={({ item, index }) => {
                                 return (
-                                    <BookmarkList item={item} index={index} parenFlatList={this}></BookmarkList>
+                                    <BookmarkList item={item} index={index} parent={this}></BookmarkList>
                                 );
                             }}>
                         </FlatList>

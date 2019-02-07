@@ -1,3 +1,3 @@
 export var Server = {
-    path: 'http://110.78.178.185:8065'
+    path: 'http://336c1706.ngrok.io'
 }
