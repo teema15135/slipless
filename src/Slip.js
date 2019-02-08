@@ -2,6 +2,7 @@ import React from 'react';
 import { Dimensions, StyleSheet, ScrollView, Text, View, Image, TouchableOpacity } from 'react-native';
 import { Server } from './config/server';
 import Icon from 'react-native-vector-icons/Ionicons';
+import RNFirebase from 'react-native-firebase';
 
 export default class Slip extends React.Component {
     constructor(props) {

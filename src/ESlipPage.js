@@ -83,6 +83,9 @@ export default class ESlipPage extends Component {
     loadRecentSlip = () => {
         var request = new XMLHttpRequest();
         var comp = this;
+        this.setState({
+            isLoading: true
+        });
         request.open('GET', Server.path + '/allSlip?uid=' + RNFirebase.auth().currentUser.uid); // jifUBEXSfGVpkLHKyOHZDsVGS042');
         request.responseType = 'json';
         request.send();
@@ -120,7 +123,7 @@ export default class ESlipPage extends Component {
                     <ProgressBarAndroid
                         styleAttr='Large'
                         indeterminate={true}
-                        />
+                    />
                 </View>
             )
         }
@@ -138,14 +141,19 @@ export default class ESlipPage extends Component {
                         width: '100%',
                         flexDirection: 'column',
                         justifyContent: 'flex-start',
-                        backgroundColor:'#344856'}}>
-                    
+                        backgroundColor: '#344856'
+                    }}>
+
                         <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
                             <View style={{ flex: 1 }}>
-                                <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 30, color: 'white', alignSelf: 'center', marginTop: 40 }}>e-slip</Text>
+                                <TouchableOpacity
+                                    onPress={() => {this.loadRecentSlip()}}
+                                    >
+                                    <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 30, color: 'white', alignSelf: 'center', marginTop: 40 }}>e-slip</Text>
+                                </TouchableOpacity>
                             </View>
                             <View style={{ flex: 4, flexDirection: 'row', justifyContent: 'flex-end', top: -20 }}>
-                                <View style={{ width: 40, flexDirection: 'column', justifyContent: 'center', marginRight:10}}>
+                                <View style={{ width: 40, flexDirection: 'column', justifyContent: 'center', marginRight: 10 }}>
                                     <TouchableOpacity style={{ width: 50, height: 50, elevation: 5 }}
                                         activeOpacity={0.1}
                                         onPress={() => {
@@ -158,7 +166,7 @@ export default class ESlipPage extends Component {
                                 </View>
                             </View>
                         </View>
-                        </View>
+                    </View>
                     {/* </ImageBackground> */}
                 </View>
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-end', backgroundColor: '#ECECEC' }}>
@@ -189,7 +197,7 @@ export default class ESlipPage extends Component {
                             style={{
                                 flexDirection: 'column',
                                 // backgroundColor: '#21a775',
-                                backgroundColor:'#D97D54',
+                                backgroundColor: '#D97D54',
                                 width: 140,
                                 height: 25,
                                 justifyContent: 'center',

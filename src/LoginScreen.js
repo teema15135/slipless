@@ -10,6 +10,7 @@ import { fbLoginPermissions } from "./constants/index";
 ///import firebase from "./config/firebase";
 import auth from "./config/auth";
 import RNFirebase from "react-native-firebase";
+import { Server } from "./config/server";
 //import CombinedButton from "react-native-combined-button";
 
 // import { handleFbLogin } from './lib/auth';
@@ -38,6 +39,11 @@ export default class App extends Component {
 
       RNFirebase.auth().onAuthStateChanged(function (user) {
         if (user) {
+          var request = new XMLHttpRequest();
+          request.open('GET', Server.path + '/login?uid=' + RNFirebase.auth().currentUser.uid + '&email=' + RNFirebase.auth().currentUser.email);
+          request.responseType = 'json';
+          request.send();
+          request.onload = () => {}
           comp.props.navigation.navigate('Main');
         } else {
           Alert.alert('Login failed');

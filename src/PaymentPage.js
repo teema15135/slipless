@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Image, ImageBackground, FlatList, ProgressBarAndroid } from 'react-native';
+import { Platform, StyleSheet, Text, View, Image, ImageBackground, FlatList, TouchableOpacity, ProgressBarAndroid } from 'react-native';
 import { Server } from './config/server';
 import { ListItem, Icon } from 'react-native-elements';
 import RNFirebase from 'react-native-firebase';
@@ -22,7 +22,9 @@ export default class PaymentPage extends Component {
     }
 
     _loadPayment() {
-
+        this.setState({
+            isLoading: true
+        });
         var nowDate = new Date();
 
         var startWeek = new Date();
@@ -124,8 +126,11 @@ export default class PaymentPage extends Component {
                     flex: 2, width: '100%', flexDirection: 'column', justifyContent: 'flex-start',
                     backgroundColor: '#87bcbf'
                 }}>
-                    <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 30, color: 'white', alignSelf: 'center', marginTop: 40 }}>Payment</Text>
-
+                    <TouchableOpacity
+                        onPress = {() => {this._loadPayment()}}
+                    >
+                        <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 30, color: 'white', alignSelf: 'center', marginTop: 40 }}>Payment</Text>
+                    </TouchableOpacity>
 
                     {/* <ImageBackground source={require('../img/glass-green-water-blur.png')} style={mainStyle.imageBG}>
                         <View style={{ flex: 1, flexDirection: 'column' }}>
@@ -156,19 +161,19 @@ export default class PaymentPage extends Component {
                 <View style={{ flex: 3, flexDirection: 'column', justifyContent: 'flex-start', top: -70 }}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', paddingHorizontal: 20 }}>
                         <View style={{ backgroundColor: '#d97d54', width: 100, height: 130, justifyContent: 'center', alignItems: 'center', borderRadius: 10 }}>
-                            <Text style={{ fontFamily: 'aqua', fontSize: 22 }}>{this.state.weeklyPayment}</Text>
+                            <Text style={{ fontFamily: 'aqua', fontSize: 20 }}>{this.state.weeklyPayment}</Text>
                             <Text style={{ fontFamily: 'aqua' }}>weekly</Text>
                         </View>
                         <View style={{ backgroundColor: '#d97d54', width: 100, height: 130, justifyContent: 'center', alignItems: 'center', borderRadius: 10 }}>
-                            <Text style={{ fontFamily: 'aqua', fontSize: 27 }}>{this.state.totalPayment}</Text>
+                            <Text style={{ fontFamily: 'aqua', fontSize: 22 }}>{this.state.totalPayment}</Text>
                             <Text style={{ fontFamily: 'aqua' }}>total</Text>
                         </View>
                         <View style={{ backgroundColor: '#d97d54', width: 100, height: 130, justifyContent: 'center', alignItems: 'center', borderRadius: 10 }}>
-                            <Text style={{ fontFamily: 'aqua', fontSize: 22 }}>{this.state.monthlyPayment}</Text>
+                            <Text style={{ fontFamily: 'aqua', fontSize: 20 }}>{this.state.monthlyPayment}</Text>
                             <Text style={{ fontFamily: 'aqua' }}>monthly</Text>
                         </View>
                     </View>
-                    <View style={{height: 278}}>
+                    <View style={{ height: 278 }}>
                         <FlatList
                             data={this.state.storePayment}
                             ItemSeparatorComponent={this.space}

@@ -3,6 +3,7 @@ import { View, Text, FlatList, TouchableOpacity, Image, ProgressBarAndroid } fro
 import { ListItem, Icon } from 'react-native-elements'
 import { Server } from './config/server';
 import { format } from 'date-fns'
+import RNFirebase from "react-native-firebase";
 
 //d97d54
 
@@ -23,7 +24,7 @@ export default class HistoryPage extends Component {
   loadHistorySlip = () => {
     var request = new XMLHttpRequest();
     var comp = this;
-    request.open('GET', Server.path + '/allSlip?uid=jifUBEXSfGVpkLHKyOHZDsVGS042');
+    request.open('GET', Server.path + '/allSlip?uid=' + RNFirebase.auth().currentUser.uid); //jifUBEXSfGVpkLHKyOHZDsVGS042');
     request.responseType = 'json';
     request.send();
     request.onload = function () {
