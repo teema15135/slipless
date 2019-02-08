@@ -11,6 +11,7 @@ import { Server } from './config/server';
 // import { slipData } from '../data/historyData';
 import { ScrollView } from 'react-native-gesture-handler';
 import { ScrollableTab } from 'native-base';
+import RNFirebase from 'react-native-firebase';
 
 var mainStyle = require('../styles/mainStyle');
 
@@ -82,7 +83,7 @@ export default class ESlipPage extends Component {
     loadRecentSlip = () => {
         var request = new XMLHttpRequest();
         var comp = this;
-        request.open('GET', Server.path + '/allSlip?uid=jifUBEXSfGVpkLHKyOHZDsVGS042');
+        request.open('GET', Server.path + '/allSlip?uid=' + RNFirebase.auth().currentUser.uid); // jifUBEXSfGVpkLHKyOHZDsVGS042');
         request.responseType = 'json';
         request.send();
         request.onload = function () {

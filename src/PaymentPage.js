@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Image, ImageBackground, FlatList, ProgressBarAndroid } from 'react-native';
 import { Server } from './config/server';
-import { ListItem, Icon } from 'react-native-elements'
+import { ListItem, Icon } from 'react-native-elements';
+import RNFirebase from 'react-native-firebase';
 
 //87bcbf
 
@@ -37,7 +38,7 @@ export default class PaymentPage extends Component {
         var comp = this;
 
         var request = new XMLHttpRequest();
-        request.open('GET', Server.path + '/allSlip?uid=jifUBEXSfGVpkLHKyOHZDsVGS042');
+        request.open('GET', Server.path + '/allSlip?uid=' + RNFirebase.auth().currentUser.uid); //jifUBEXSfGVpkLHKyOHZDsVGS042');
         request.responseType = 'json';
         request.send();
         request.onload = () => {

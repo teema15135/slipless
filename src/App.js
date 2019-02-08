@@ -41,9 +41,10 @@ const TabNavigator = createBottomTabNavigator({
           iconName = 'ios-qr-scanner';
           size = 50;
           return (
-            <ImageBackground source={require('../img/home-icon-bg.png')} style={{
-              width: 120,
-              height: 120,
+            <ImageBackground source={require('../img/home-icon-bg-new.png')} style={{
+              top: -10,
+              width: 110,
+              height: 110,
               flexDirection: 'column',
               justifyContent: 'center',
               elevation: 1,
@@ -98,7 +99,7 @@ const TabNavigator = createBottomTabNavigator({
       },
     }),
     tabBarOptions: {
-      activeTintColor: '#ececec',
+      activeTintColor: '#344856',
       inactiveTintColor: 'grey',
     },
     initialRouteName: 'Home',

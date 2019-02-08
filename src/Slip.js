@@ -16,7 +16,7 @@ export default class Slip extends React.Component {
 
     componentDidMount() {
         var request = new XMLHttpRequest();
-        request.open('GET', Server.path + '/bookmark?uid=jifUBEXSfGVpkLHKyOHZDsVGS042'); // change uid to firebase auth
+        request.open('GET', Server.path + '/bookmark?uid=' + RNFirebase.auth().currentUser.uid); //jifUBEXSfGVpkLHKyOHZDsVGS042'); // change uid to firebase auth
         request.responseType = 'json';
         request.send();
         request.onload = () => {
@@ -38,13 +38,13 @@ export default class Slip extends React.Component {
 
     changeBookmarkState() {
         var request = new XMLHttpRequest();
-        request.open('DELETE', Server.path + '/bookmark?uid=jifUBEXSfGVpkLHKyOHZDsVGS042&sid=' + this.state.sid);
+        request.open('DELETE', Server.path + '/bookmark?uid=' + RNFirebase.auth().currentUser.uid /*jifUBEXSfGVpkLHKyOHZDsVGS042*/ + '&sid=' + this.state.sid);
         request.responseType = 'json';
         request.send();
         request.onload = () => {
             if(!this.state.isFavorite) {
                 var anotherRequest = new XMLHttpRequest();
-                anotherRequest.open('POST', Server.path + '/bookmark?uid=jifUBEXSfGVpkLHKyOHZDsVGS042&sid=' + this.state.sid);
+                anotherRequest.open('POST', Server.path + '/bookmark?uid=' + RNFirebase.auth().currentUser.uid /*jifUBEXSfGVpkLHKyOHZDsVGS042*/ + '&sid=' + this.state.sid);
                 anotherRequest.responseType = 'json';
                 anotherRequest.setRequestHeader('Content-Type', 'application/json; charset=utf-8')
                 anotherRequest.send(JSON.stringify({ slip_name: 'NewSlip' }));

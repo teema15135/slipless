@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Image, ImageBackground, FlatList, ProgressBarAndroid } from 'react-native';
 import { Server } from './config/server';
-import { ListItem, Icon } from 'react-native-elements'
+import { ListItem, Icon } from 'react-native-elements';
+import RNFirebase from 'react-native-firebase';
 
 var mainStyle = require('../styles/mainStyle');
 
@@ -23,7 +24,7 @@ export default class PointPage extends Component {
     getPoint = () => {
         var request = new XMLHttpRequest();
         var comp = this;
-        request.open('GET', Server.path + '/point?uid=jifUBEXSfGVpkLHKyOHZDsVGS042');
+        request.open('GET', Server.path + '/point?uid=' + RNFirebase.auth().currentUser.uid); //jifUBEXSfGVpkLHKyOHZDsVGS042');
         request.responseType = 'json';
         request.send();
         request.onload = function () {

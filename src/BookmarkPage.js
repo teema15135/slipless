@@ -6,6 +6,7 @@ import {
 import { Color } from './config/color';
 import { Server } from './config/server';
 import { ListItem, Icon } from 'react-native-elements'
+import RNFirebase from 'react-native-firebase';
 
 var mainStyle = require('../styles/mainStyle');
 
@@ -90,7 +91,7 @@ export default class BookmarkScreen extends Component {
     loadBookmarkSlip = () => {
         var request = new XMLHttpRequest();
         var comp = this;
-        request.open('GET', Server.path + '/bookmark?uid=jifUBEXSfGVpkLHKyOHZDsVGS042');
+        request.open('GET', Server.path + '/bookmark?uid=' + RNFirebase.auth().currentUser.uid); //jifUBEXSfGVpkLHKyOHZDsVGS042');
         request.responseType = 'json';
         request.send();
         request.onload = function () {

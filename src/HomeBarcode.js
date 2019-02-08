@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Button, TouchableHighlight, StyleSheet, Text, View, ImageBackground, Image, TouchableWithoutFeedback, ProgressBarAndroid } from 'react-native';
 import Barcode from 'react-native-barcode-builder';
-import IconComponent from 'react-native-vector-icons/Ionicons'
+import IconComponent from 'react-native-vector-icons/Ionicons';
 import firebase from './config/firebase';
 import { Color } from './config/color';
 import { Server } from './config/server';
+import RNFirebase from 'react-native-firebase';
 
 // const userID = firebase.auth().currentUser.uid;
 
@@ -25,7 +26,7 @@ class UserBarcode extends Component {
     getBarcode = () => {
         var request = new XMLHttpRequest();
         var comp = this;
-        request.open('GET', Server.path + '/getBarcode?uid=jifUBEXSfGVpkLHKyOHZDsVGS042');
+        request.open('GET', Server.path + '/getBarcode?uid=' + RNFirebase.auth().currentUser.uid); //jifUBEXSfGVpkLHKyOHZDsVGS042
         request.responseType = 'json';
         request.send();
         request.onload = function () {

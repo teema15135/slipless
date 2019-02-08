@@ -8,6 +8,8 @@ import Modal from "react-native-modal";
 import { Item } from 'native-base';
 import { Server } from './config/server';
 import { ListItem, Icon } from 'react-native-elements'
+import Barcode from 'react-native-barcode-builder';
+import RNFirebase from 'react-native-firebase';
 
 var mainStyle = require('../styles/mainStyle');
 
@@ -64,7 +66,7 @@ class RewardList extends Component {
                                     {
                                         text: 'ยืนยัน', onPress: () => {
                                             var request = new XMLHttpRequest();
-                                            request.open('DELETE', Server.path + '/coupon?uid=' + 'jifUBEXSfGVpkLHKyOHZDsVGS042' + '&bar=' + this.props.item.coupon_barcode);
+                                            request.open('DELETE', Server.path + '/coupon?uid=' + RNFirebase.auth().currentUser.uid/*'jifUBEXSfGVpkLHKyOHZDsVGS042'*/ + '&bar=' + this.props.item.coupon_barcode);
                                             request.responseType = 'json';
                                             request.send();
                                             request.onload = () => {
@@ -91,6 +93,9 @@ class RewardList extends Component {
                 </View>
                 <View>
 
+                </View>
+                <View style={{ height: 40, overflow: 'hidden',}}>
+                    <Barcode value={this.props.item.coupon_barcode} format="CODE128" />
                 </View>
             </View>
         );
@@ -143,7 +148,7 @@ export default class MyList extends React.PureComponent {
     _loadAllCoupon = () => {
         var request = new XMLHttpRequest();
         var comp = this;
-        request.open('GET', Server.path + '/coupon?uid=' + 'jifUBEXSfGVpkLHKyOHZDsVGS042');
+        request.open('GET', Server.path + '/coupon?uid=' + RNFirebase.auth().currentUser.uid); //'jifUBEXSfGVpkLHKyOHZDsVGS042');
         request.responseType = 'json';
         request.send();
         request.onload = function () {
@@ -247,6 +252,7 @@ export default class MyList extends React.PureComponent {
                     <FlatList
                         data={this.state.storeList}
                         ItemSeparatorComponent={this.space}
+                        keyExtractor={(item, index) => item.key}
                         renderItem={this.renderItem}
                     />
 
@@ -272,6 +278,7 @@ export default class MyList extends React.PureComponent {
                                     showsVerticalScrollIndicator={false}
                                     showsHorizontalScrollIndicator={false}
                                     data={this.state.currentStoreCoupons}
+                                    keyExtractor={(item, index) => index.toString()}
                                     renderItem={({ item, index }) => {
                                         return (
                                             <RewardList item={item} index={index} parenFlatList={this} callback={this._loadAllCoupon.bind(this)} toggleModal={this._toggleModal.bind(this)}></RewardList>
